@@ -1,16 +1,16 @@
 
 # BEGIN WordPress
-# De richtlijnen (regels) tussen "BEGIN WordPress" en "END WordPress" worden
-# dynamisch gegenereerd en zouden alleen aangepast mogen worden via WordPress filters.
-# Alle wijzigingen aan de richtlijnen tussen deze markeringen worden overschreven.
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /parketvleoren/parketvloer/wordpress/
+RewriteBase /parketvloer/wordpress/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /parketvleoren/parketvloer/wordpress/index.php [L]
+RewriteRule . /parketvloer/wordpress/index.php [L]
 </IfModule>
 
 # END WordPress
