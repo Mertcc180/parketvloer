@@ -918,3 +918,212 @@
     height: 70px;
   }
 }
+
+/* ========================================
+   CONTACT PAGE STYLES
+   ======================================== */
+
+.pg-contact {
+  background: var(--color-bg-dark);
+  color: var(--color-text);
+  padding-top: 112px; /* Account for fixed header */
+}
+
+/* Contact Hero */
+.pg-contact-hero {
+  padding: var(--spacing-lg) var(--spacing-md);
+  text-align: center;
+  background: var(--color-bg-dark);
+}
+
+.pg-contact-hero__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pg-contact-hero__title {
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
+  color: #fff;
+  margin-bottom: var(--spacing-md);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Contact Form */
+.pg-contact-form {
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg);
+  background: var(--color-bg-dark);
+}
+
+.pg-contact-form__inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pg-contact-form__title {
+  font-size: 1.2rem;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-md);
+}
+
+.pg-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.pg-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pg-form__label {
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.pg-form__input,
+.pg-form__textarea {
+  padding: 12px;
+  background-color: #f5f5f5;
+  border: none;
+  color: #333;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.pg-form__input:focus,
+.pg-form__textarea:focus {
+  outline: 1px solid var(--color-accent);
+}
+
+.pg-form__textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.pg-form__submit {
+  background-color: var(--color-accent);
+  color: #000;
+  border: none;
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.pg-form__submit:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.pg-btn--gold {
+  background-color: var(--color-accent);
+  color: var(--color-bg-dark);
+}
+
+/* Contact Info Section */
+.pg-contact-info {
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: #1a1d2e;
+  position: relative;
+}
+
+.pg-contact-info__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Update contact details styling to match screenshot */
+.pg-contact-details__title,
+.pg-contact-map__title {
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: var(--spacing-md);
+}
+
+.pg-contact-details__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.pg-contact-details__item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 40px; /* Increased for icon spacing */
+}
+
+.pg-contact-details__item::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pg-contact-details__item--phone::before {
+  content: "📞";
+}
+
+.pg-contact-details__item--email::before {
+  content: "✉️";
+}
+
+.pg-contact-details__item--address::before {
+  content: "📍";
+}
+
+.pg-contact-details__label {
+  font-weight: 600;
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.pg-contact-details__value {
+  font-style: normal;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+/* Update map container styling to match screenshot */
+.pg-contact-map__container {
+  height: 200px; /* Adjusted height */
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Add the blue overlay to map */
+.pg-contact-map iframe {
+  width: 100%;
+  height: 100%;
+  filter: hue-rotate(180deg) invert(90%) contrast(85%) saturate(200%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pg-contact-info__inner {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .pg-contact-details {
+    margin-bottom: var(--spacing-md);
+  }
+}
