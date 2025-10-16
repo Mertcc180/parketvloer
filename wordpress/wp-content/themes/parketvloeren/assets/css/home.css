@@ -1,10 +1,6 @@
-/* ========================================
-   HOMEPAGE STYLES – PARKETVLOEREN
-   ======================================== */
-
 :root {
   --color-bg-dark: #1a1d2e;
-  --color-bg-section: #252839;
+  --color-bg-section: #392525;
   --color-text: #e8e8e8;
   --color-text-muted: #b0b0b0;
   --color-accent: #d4af37;
@@ -79,20 +75,13 @@
   display: flex;
   align-items: center;
   gap: 0;
-  text-decoration: none;
-  color: var(--color-accent);
-  transition: opacity 0.3s ease;
-}
-
-.pg-header__logo a:hover {
-  opacity: 0.8;
 }
 
 .pg-header__logo-img {
-  height: 60px;
+  height: 90px;
   width: auto;
   object-fit: contain;
-  filter: none;
+  background: transparent;
 }
 
 .pg-header__nav {
@@ -471,7 +460,7 @@
 
 .pg-project__media {
   width: 100%;
-  padding-top: 66.67%; /* 3:2 aspect ratio */
+  padding-top: 66.67%;
   background: var(--img, linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%));
   background-size: cover;
   background-position: center;
@@ -560,19 +549,11 @@
 }
 
 .pg-footer__logo-img {
-  height: 80px;
+  height: 180px;
   width: auto;
   object-fit: contain;
-  filter: none;
-}
-
-.pg-footer__sitename {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  font-style: italic;
-  font-family: "Brush Script MT", cursive;
-  margin-top: 0.5rem;
+  filter: brightness(1.2) contrast(1.1);
+  background: transparent;
 }
 
 .pg-footer__cols {
@@ -647,8 +628,203 @@
 }
 
 /* ========================================
-   MOBILE RESPONSIVE
+   OVER ONS PAGE STYLES
    ======================================== */
+
+.pg-overons {
+  background: var(--color-bg-dark);
+  color: var(--color-text);
+  padding-top: 112px; /* Account for fixed header */
+}
+
+/* About Hero Section */
+.pg-about-hero {
+  background: var(--color-bg-dark);
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+}
+
+.pg-about-hero__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pg-about-hero__title {
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-md);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.pg-about-hero__text {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+/* About Sections */
+.pg-about-section {
+  padding: var(--spacing-xl) var(--spacing-md);
+  position: relative;
+}
+
+.pg-about-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.2) 50%,
+    transparent 100%
+  );
+}
+
+.pg-about-section__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pg-about-section__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pg-about-section__title {
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-md);
+  font-weight: 700;
+  text-align: center;
+}
+
+.pg-about-section__text {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  margin-bottom: var(--spacing-md);
+}
+
+.pg-about-section__text--centered {
+  text-align: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Experience Section with image */
+.pg-about-experience__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.pg-about-experience__text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.pg-about-experience__image {
+  flex: 0 0 40%;
+  min-width: 300px;
+  max-width: 450px;
+}
+
+.pg-about-experience__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pg-about-experience__wrapper {
+    flex-direction: column;
+  }
+
+  .pg-about-experience__image {
+    order: -1;
+    margin: 0 auto var(--spacing-md);
+    max-width: 100%;
+  }
+}
+
+/* About Experience Section */
+.pg-about-experience {
+  background: var(--color-bg-section);
+}
+
+/* About Mission & Values */
+.pg-about-mission {
+  background: var(--color-bg-dark);
+}
+
+.pg-about-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.pg-about-value {
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+.pg-about-value__icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 50%;
+  color: var(--color-accent);
+}
+
+.pg-about-value__title {
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+}
+
+.pg-about-value__text {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .pg-overons {
+    padding-top: 90px; /* Smaller offset for mobile header */
+  }
+
+  .pg-about-values {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .pg-about-value {
+    padding: var(--spacing-sm);
+  }
+
+  .pg-about-hero,
+  .pg-about-section {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+}
+
 @media (max-width: 1024px) {
   .pg-header__inner {
     gap: 1.5rem;
@@ -681,7 +857,7 @@
   }
 
   .pg-header__logo-img {
-    height: 50px;
+    height: 55px;
   }
 
   .pg-header__nav {
@@ -714,6 +890,10 @@
     gap: var(--spacing-md);
   }
 
+  .pg-footer__logo-img {
+    height: 80px;
+  }
+
   .pg-btn {
     padding: 0.85rem 1.75rem;
     font-size: 0.95rem;
@@ -722,7 +902,7 @@
 
 @media (max-width: 480px) {
   .pg-header__logo-img {
-    height: 40px;
+    height: 45px;
   }
 
   .pg-section {
@@ -735,6 +915,6 @@
   }
 
   .pg-footer__logo-img {
-    height: 60px;
+    height: 70px;
   }
 }
