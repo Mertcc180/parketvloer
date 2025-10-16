@@ -1,6 +1,6 @@
 <?php
 /**
- * Custom Front Page Template
+ * Template Name: Homepage
  *
  * Renders a bespoke landing page that matches the provided design mockup.
  * Uses existing Astra header/footer and provides full-width hero and
@@ -11,7 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// Don't use get_header() - we'll build our own minimal header
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -28,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="pg-header__inner">
         <div class="pg-header__logo">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo.png' ); ?>" alt="Het Parket Gilde Logo" class="pg-header__logo-img">
+                <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo2.png' ); ?>" alt="Het Parket Gilde Logo" class="pg-header__logo-img">
             </a>
         </div>
         <nav class="pg-header__nav">
@@ -79,7 +78,7 @@ $proj3_style = file_exists( $theme_dir . $proj3_rel ) ? "--img:url('{$theme_uri}
         <div class="pg-hero__overlay"></div>
         <div class="pg-hero__inner">
             <h1 class="pg-hero__title">Unieke Parketvloeren voor Jouw Woonstijl</h1>
-            <p class="pg-hero__subtitle">Bij Het Parket Gilde maken we vakmanschap zichtbaar in elke plank.</p>
+            <p class="pg-hero__subtitle">Stijl en Kwaliteit voor ieder Interieur</p>
             <div class="pg-hero__actions">
                 <a href="<?php echo esc_url( home_url( '/diensten' ) ); ?>" class="pg-btn pg-btn--primary">Bekijk onze Services</a>
             </div>
@@ -173,14 +172,12 @@ $proj3_style = file_exists( $theme_dir . $proj3_rel ) ? "--img:url('{$theme_uri}
     <div class="pg-footer__inner">
         <div class="pg-footer__brand">
             <div class="pg-footer__logo" aria-hidden="true">
-                <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo.png' ); ?>" alt="Het Parket Gilde Logo" class="pg-footer__logo-img">
+                <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo2.png' ); ?>" alt="Het Parket Gilde Logo" class="pg-footer__logo-img">
             </div>
-            <div class="pg-footer__sitename">Het Parket Gilde</div>
         </div>
 
         <div class="pg-footer__cols">
             <div class="pg-footer__col">
-                <h4 class="pg-footer__heading">Home</h4>
                 <ul class="pg-footer__links">
                     <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/over-ons' ) ); ?>">Over ons</a></li>
