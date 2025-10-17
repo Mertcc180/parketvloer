@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <?php wp_head(); ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 /* Ensure our CSS is loaded */
 @import url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/css/home.css' ); ?>');
@@ -101,19 +102,28 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="pg-contact-details">
                 <h2 class="pg-contact-details__title">Contactgegevens</h2>
                 <ul class="pg-contact-details__list">
-                    <li class="pg-contact-details__item pg-contact-details__item--phone">
-                        <span class="pg-contact-details__label">Telefoon</span>
-                        <a href="tel:0224751129" class="pg-contact-details__value">0224751129</a>
+                    <li class="pg-contact-details__item">
+                        <i class="fa-solid fa-phone pg-contact-details__icon"></i>
+                        <div class="pg-contact-details__content">
+                            <span class="pg-contact-details__label">Telefoon</span>
+                            <a href="tel:0224751129" class="pg-contact-details__value">0224751129</a>
+                        </div>
                     </li>
-                    <li class="pg-contact-details__item pg-contact-details__item--email">
-                        <span class="pg-contact-details__label">E-mail</span>
-                        <a href="mailto:info@hetparketgilde.nl" class="pg-contact-details__value">info@hetparketgilde.nl</a>
+                    <li class="pg-contact-details__item">
+                        <i class="fa-solid fa-envelope pg-contact-details__icon"></i>
+                        <div class="pg-contact-details__content">
+                            <span class="pg-contact-details__label">E-mail</span>
+                            <a href="mailto:info@hetparketgilde.nl" class="pg-contact-details__value">info@hetparketgilde.nl</a>
+                        </div>
                     </li>
-                    <li class="pg-contact-details__item pg-contact-details__item--address">
-                        <span class="pg-contact-details__label">Adres</span>
-                        <address class="pg-contact-details__value">
-                            De dijken, 7CT7A7 EE Tuitjenhorn
-                        </address>
+                    <li class="pg-contact-details__item">
+                        <i class="fa-solid fa-location-dot pg-contact-details__icon"></i>
+                        <div class="pg-contact-details__content">
+                            <span class="pg-contact-details__label">Adres</span>
+                            <address class="pg-contact-details__value">
+                                De dijken, 7CT7A7 EE Tuitjenhorn
+                            </address>
+                        </div>
                     </li>
                 </ul>
             </div>
