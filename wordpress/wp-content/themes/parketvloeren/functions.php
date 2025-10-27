@@ -223,9 +223,9 @@ add_action( 'wp_enqueue_scripts', function () {
 
 /**
  * Theme customizations – enqueue home page CSS on front page and custom templates.
+ * (Eén blok is genoeg; voorkom dubbele enqueue.)
  */
 add_action( 'wp_enqueue_scripts', function () {
-    // Load custom CSS on front page AND all custom templates
     if ( is_front_page() || is_page_template() ) {
         $ver = wp_get_theme()->get( 'Version' );
         wp_enqueue_style(
