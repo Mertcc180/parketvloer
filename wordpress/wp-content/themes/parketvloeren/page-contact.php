@@ -39,6 +39,7 @@ if ( $has_acf && !$phone_label && !$phone && !$email_label && !$email && !$addr_
 
 $map_title = $has_acf ? get_field('contact_map_title', $page_id) : '';
 $map_url   = $has_acf ? trim(get_field('contact_map', $page_id)) : '';
+$map_embed = $has_acf ? trim(get_field('contact_map_embed', $page_id)) : ''; // <-- nieuw veld
 // Allow only safe attributes for the iframe
 $allowed_iframe = [
     'iframe' => [
@@ -177,17 +178,27 @@ $allowed_map = $allowed_iframe + [
                 </ul>
             </div>
 
-            <?php if ( !empty($map_url) ) : ?>
+            <?php if ( !empty($map_embed) ) : ?>
                 <div class="pg-contact-map">
                     <?php if ($map_title): ?>
                         <h2 class="pg-contact-map__title"><?php echo esc_html($map_title); ?></h2>
                     <?php endif; ?>
                     <div class="pg-contact-map__container">
                         <?php
-                        // Zet gewone Google Maps link om naar embed
+                        // Alleen veilige iframe tonen
+                        echo wp_kses($map_embed, $allowed_iframe);
+                        ?>
+                    </div>
+                </div>
+            <?php elseif ( !empty($map_url) ) : ?>
+                <div class="pg-contact-map">
+                    <?php if ($map_title): ?>
+                        <h2 class="pg-contact-map__title"><?php echo esc_html($map_title); ?></h2>
+                    <?php endif; ?>
+                    <div class="pg-contact-map__container">
+                        <?php
                         $embed_src = '';
                         if (strpos($map_url, 'google.com/maps') !== false || strpos($map_url, 'goo.gl/maps') !== false || strpos($map_url, 'maps.app.goo.gl') !== false) {
-                            // Gebruik de link als zoekopdracht in embed
                             $embed_src = 'https://www.google.com/maps?q=' . rawurlencode($map_url) . '&output=embed';
                         }
                         if ($embed_src) {
