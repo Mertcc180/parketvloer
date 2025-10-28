@@ -205,3 +205,107 @@ require_once ASTRA_THEME_DIR . 'inc/core/markup/class-astra-markup.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-filters.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-hooks.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-functions.php';
+
+/**
+ * Theme customizations – enqueue home page CSS only on the front page.
+ */
+add_action( 'wp_enqueue_scripts', function () {
+	if ( is_front_page() ) {
+		$ver = wp_get_theme()->get( 'Version' );
+		wp_enqueue_style(
+			'parketvloeren-home',
+			get_stylesheet_directory_uri() . '/assets/css/home.css',
+			array(),
+			$ver
+		);
+	}
+}, 20 );
+
+/**
+ * Theme customizations – enqueue home page CSS on front page and custom templates.
+ * (Eén blok is genoeg; voorkom dubbele enqueue.)
+ */
+add_action( 'wp_enqueue_scripts', function () {
+    if ( is_front_page() || is_page_template() ) {
+        $ver = wp_get_theme()->get( 'Version' );
+        wp_enqueue_style(
+            'parketvloeren-home',
+            get_stylesheet_directory_uri() . '/assets/css/home.css',
+            array(),
+            $ver
+        );
+    }
+}, 20 );
+
+/**
+ * Verberg "Sample Page" uit alle WordPress menu's zonder items te verwijderen.
+ * Als de pagina bestaat, wordt deze gefilterd op zowel slug als titel.
+ */
+add_filter( 'wp_get_nav_menu_items', function( $items ) {
+	foreach ( $items as $k => $item ) {
+		$title = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
+		$url   = isset( $item->url ) ? $item->url : '';
+		$is_sample_title = strcasecmp( $title, 'Sample Page' ) === 0 || strcasecmp( $title, 'Voorbeeldpagina' ) === 0;
+		$is_sample_slug  = $url && ( strpos( untrailingslashit( $url ), '/sample-page' ) !== false || strpos( untrailingslashit( $url ), '/voorbeeldpagina' ) !== false );
+		if ( $is_sample_title || $is_sample_slug ) {
+			unset( $items[ $k ] );
+		}
+	}
+	return array_values( $items );
+}, 10, 1 );
+
+/**
+ * Forceer voorpagina zonder sidebar + full-width layout in Astra.
+ */
+add_filter( 'astra_page_layout', function( $layout ) {
+	if ( is_front_page() ) {
+		return 'no-sidebar';
+	}
+	return $layout;
+}, 20 );
+
+add_filter( 'astra_get_content_layout', function( $layout ) {
+	if ( is_front_page() ) {
+		// "page-builder" geeft een volle breedte container met minimale padding.
+		return 'page-builder';
+	}
+	return $layout;
+}, 20 );
+
+/**
+ * Verberg "Sample Page/Voorbeeldpagina" ook in fallback menu's (wp_page_menu/wp_list_pages).
+ */
+function parketvloeren_get_sample_page_ids() {
+	$ids   = array();
+	$slugs = array( 'sample-page', 'voorbeeldpagina', 'sample', 'voorbeeld' );
+	foreach ( $slugs as $slug ) {
+		$p = get_page_by_path( $slug );
+		if ( $p && ! in_array( $p->ID, $ids, true ) ) {
+			$ids[] = $p->ID;
+		}
+	}
+	$titles = array( 'Sample Page', 'Voorbeeldpagina' );
+	foreach ( $titles as $title ) {
+		$p = get_page_by_title( $title );
+		if ( $p instanceof WP_Post && 'page' === $p->post_type && ! in_array( $p->ID, $ids, true ) ) {
+			$ids[] = $p->ID;
+		}
+	}
+	return $ids;
+}
+
+add_filter( 'wp_list_pages_excludes', function( $exclude ) {
+	$ids = parketvloeren_get_sample_page_ids();
+	return array_values( array_unique( array_merge( (array) $exclude, $ids ) ) );
+} );
+
+add_filter( 'wp_page_menu_args', function( $args ) {
+	$ids = parketvloeren_get_sample_page_ids();
+	if ( ! empty( $ids ) ) {
+		$existing = isset( $args['exclude'] ) ? $args['exclude'] : '';
+		$parts    = array_filter( array_map( 'trim', explode( ',', (string) $existing ) ) );
+		$parts    = array_merge( $parts, array_map( 'strval', $ids ) );
+		$args['exclude'] = implode( ',', array_unique( $parts ) );
+	}
+	return $args;
+} );
