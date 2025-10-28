@@ -1,6 +1,6 @@
 :root {
   --color-bg-dark: #1a1d2e;
-  --color-bg-section: #1F2129;
+  --color-bg-section: #1f2129;
   --color-text: #e8e8e8;
   --color-text-muted: #b0b0b0;
   --color-accent: #d4af37;
@@ -417,63 +417,50 @@
 }
 
 .pg-project {
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: all 0.4s ease;
-  border: 1px solid rgba(212, 175, 55, 0.1);
-  cursor: pointer;
-}
-
-.pg-project:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(212, 175, 55, 0.4);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  transition: transform 0.2s;
 }
 
 .pg-project__media {
-  width: 100%;
-  padding-top: 66.67%;
-  background: var(--img, linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%));
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
   background-size: cover;
   background-position: center;
+  min-height: 160px;
   position: relative;
-  overflow: hidden;
-  transition: all 0.4s ease;
-}
-
-.pg-project:hover .pg-project__media {
-  transform: scale(1.1);
-}
-
-.pg-project__media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.pg-project:hover .pg-project__media::after {
-  opacity: 1;
 }
 
 .pg-project__title {
-  padding: var(--spacing-md);
-  font-size: 1.35rem;
+  background: rgba(20, 20, 20, 0.85);
   color: #fff;
-  font-weight: 600;
-  text-align: center;
-  transition: color 0.3s ease;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-radius: 0 0 8px 8px;
+  margin: 0;
+  min-height: unset;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: -5px;
 }
 
-.pg-project:hover .pg-project__title {
-  color: var(--color-accent);
+.pg-grid.pg-grid--3 {
+  gap: 2.5rem 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .pg-grid.pg-grid--3 {
+    gap: 1.5rem 0.5rem;
+  }
+  .pg-project__media {
+    min-height: 120px;
+  }
 }
 
 .pg-cta {
