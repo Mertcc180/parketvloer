@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<ul class="pg-footer__links">
 						<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
 						<li><a href="<?php echo esc_url( home_url( '/over-ons' ) ); ?>">Over ons</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/diensten' ) ); ?>">Diensten</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/services' ) ); ?>">Services</a></li>
 						<li><a href="<?php echo esc_url( home_url( '/projecten' ) ); ?>">Projecten</a></li>
 						<li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a></li>
 					</ul>

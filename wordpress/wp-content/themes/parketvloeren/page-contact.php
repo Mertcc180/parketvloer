@@ -78,7 +78,7 @@ $allowed_map = $allowed_iframe + [
             <ul class="pg-nav">
                 <li class="pg-nav__item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
                 <li class="pg-nav__item"><a href="<?php echo esc_url( home_url( '/over-ons' ) ); ?>">Over ons</a></li>
-                <li class="pg-nav__item"><a href="<?php echo esc_url( home_url( '/diensten' ) ); ?>">Services</a></li>
+                <li class="pg-nav__item"><a href="<?php echo esc_url( home_url( '/services' ) ); ?>">Services</a></li>
                 <li class="pg-nav__item"><a href="<?php echo esc_url( home_url( '/projecten' ) ); ?>">Projecten</a></li>
                 <li class="pg-nav__item pg-nav__item--active"><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a></li>
             </ul>
@@ -228,7 +228,7 @@ $allowed_map = $allowed_iframe + [
                 <ul class="pg-footer__links">
                     <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/over-ons' ) ); ?>">Over ons</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/diensten' ) ); ?>">Services</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/services' ) ); ?>">Services</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/projecten' ) ); ?>">Projecten</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a></li>
                 </ul>
