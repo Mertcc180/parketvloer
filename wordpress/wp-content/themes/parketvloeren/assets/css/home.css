@@ -1083,6 +1083,11 @@
   letter-spacing: 1px;
 }
 
+.pg-footer__address,
+.pg-footer__address a {
+  color: #fff !important;
+}
+
 @media (max-width: 768px) {
   .pg-contact-info__inner {
     grid-template-columns: 1fr;
