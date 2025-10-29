@@ -23,38 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class('pg-body'); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Custom Header Navigation (copy from front-page.php) -->
-<header class="pg-header">
-    <div class="pg-header__inner">
-        <div class="pg-header__logo">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo2.png' ); ?>" alt="Het Parket Gilde Logo" class="pg-header__logo-img">
-            </a>
-        </div>
-        <nav class="pg-header__nav">
-            <ul class="pg-nav">
-                <li class="pg-nav__item">
-                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-                </li>
-                <li class="pg-nav__item">
-                    <a href="<?php echo esc_url( home_url( '/over-ons' ) ); ?>">Over ons</a>
-                </li>
-                <li class="pg-nav__item">
-                    <a href="<?php echo esc_url( home_url( '/diensten' ) ); ?>">Services</a>
-                </li>
-                <li class="pg-nav__item pg-nav__item--active">
-                    <a href="<?php echo esc_url( home_url( '/projecten' ) ); ?>">Projecten</a>
-                </li>
-                <li class="pg-nav__item">
-                    <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="pg-header__cta">
-            <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="pg-btn pg-btn--header">Offerte aanvragen</a>
-        </div>
-    </div>
-</header>
+<?php include locate_template('pg-header.php'); ?>
 
 <main class="pg-projects" style="padding-top:120px;">
     <div class="pg-section__inner">
@@ -88,44 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
 </main>
 
-<!-- Footer Section (copy from front-page.php) -->
-<footer class="pg-footer" role="contentinfo">
-    <div class="pg-footer__inner">
-        <div class="pg-footer__brand">
-            <div class="pg-footer__logo" aria-hidden="true">
-                <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo2.png' ); ?>" alt="Het Parket Gilde Logo" class="pg-footer__logo-img">
-            </div>
-        </div>
-        <div class="pg-footer__cols">
-            <div class="pg-footer__col">
-                <ul class="pg-footer__links">
-                    <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/over-ons' ) ); ?>">Over ons</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/diensten' ) ); ?>">Diensten</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/projecten' ) ); ?>">Projecten</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a></li>
-                </ul>
-            </div>
-            <div class="pg-footer__col">
-                <h4 class="pg-footer__heading">Contact info</h4>
-                <address class="pg-footer__address">
-                    <div>De Goorn</div>
-                    <div>Regio Koggenland</div>
-                    <div>Nederland</div>
-                </address>
-                <ul class="pg-footer__contact">
-                    <li><a href="mailto:info@hetparketgilde.nl">info@hetparketgilde.nl</a></li>
-                    <li><a href="tel:+31612345678">+31 6 12 34 56 78</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="pg-footer__bottom">
-        <div class="pg-footer__bottom-inner">
-            <span>©️ Het Parket Gilde. Alle Rechten Voorbehouden.</span>
-        </div>
-    </div>
-</footer>
+<?php include locate_template('pg-footer.php'); ?>
 
 <?php wp_footer(); ?>
 </body>
