@@ -144,6 +144,7 @@
 
 .pg-btn--header:hover {
   background: var(--color-accent-hover);
+  color: #e1dedb;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
 }
@@ -244,6 +245,7 @@
 
 .pg-btn--primary:hover {
   background: var(--color-accent-hover);
+  color: #e1dedb;
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
 }
@@ -434,6 +436,7 @@
   min-height: 160px;
   position: relative;
   background-image: var(--img, none);
+  height: 15rem;
 }
 
 .pg-project__title {
