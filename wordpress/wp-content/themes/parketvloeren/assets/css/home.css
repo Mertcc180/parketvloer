@@ -433,6 +433,7 @@
   background-position: center;
   min-height: 160px;
   position: relative;
+  background-image: var(--img, none);
 }
 
 .pg-project__title {
@@ -1083,6 +1084,11 @@
   letter-spacing: 1px;
 }
 
+.pg-footer__address,
+.pg-footer__address a {
+  color: #fff !important;
+}
+
 @media (max-width: 768px) {
   .pg-contact-info__inner {
     grid-template-columns: 1fr;
@@ -1097,5 +1103,102 @@
 
   .pg-contact-map__container {
     height: 250px;
+  }
+}
+
+.services-main {
+  background: #181824;
+  color: #fff;
+  padding: 120px 0 60px 0;
+  text-align: center;
+}
+.services-title {
+  font-size: 2rem;
+  color: #d1d1d1;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.services-intro {
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  color: #d1d1d1;
+  font-size: 1rem;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 32px;
+  justify-items: center;
+  max-width: 900px;
+  margin: 0 auto 48px auto; 
+}
+.service-card {
+  background: #232336;
+  border-radius: 8px;
+  padding: 28px 20px 24px 20px;
+  width: 100%;
+  max-width: 270px;
+  min-height: 220px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+.service-icon {
+  color: #e0b94b;
+  font-size: 2rem;
+  margin-bottom: 18px;
+  display: block;
+}
+.service-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.service-card p {
+  color: #d1d1d1;
+  font-size: 0.98rem;
+  margin: 0;
+}
+.services-cta {
+  background: #232336;
+  border-radius: 8px;
+  padding: 32px 20px 28px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.services-cta h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #fff;
+}
+.services-cta p {
+  color: #d1d1d1;
+  margin-bottom: 24px;
+}
+.cta-btn {
+  background: #e0b94b;
+  color: #232336;
+  padding: 14px 36px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.2s;
+  display: inline-block;
+}
+.cta-btn:hover {
+  background: #cfa32e;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    max-width: 350px;
   }
 }
