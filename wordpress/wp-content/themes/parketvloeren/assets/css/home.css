@@ -594,9 +594,10 @@
   padding-top: 112px;
 }
 
+
 .pg-about-hero {
-  background: var(--color-bg-dark);
-  padding: var(--spacing-xl) var(--spacing-md);
+  background: #181824;
+  padding: calc(var(--spacing-xl) * 1.4) var(--spacing-md);
   text-align: center;
 }
 
@@ -623,7 +624,7 @@
 
 /* About Sections */
 .pg-about-section {
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: calc(var(--spacing-xl) * 1.4) var(--spacing-md);
   position: relative;
 }
 
@@ -648,7 +649,7 @@
 }
 
 .pg-about-section__content {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -657,13 +658,13 @@
   color: var(--color-accent);
   margin-bottom: var(--spacing-md);
   font-weight: 700;
-  text-align: center;
+  text-align: left;
 }
 
 .pg-about-section__text {
   color: var(--color-text-muted);
   line-height: 1.7;
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-size: clamp(1rem, 2vw, 1.2rem);
   margin-bottom: var(--spacing-md);
 }
 
@@ -696,6 +697,7 @@
 .pg-about-experience__image img {
   width: 100%;
   height: auto;
+  max-width: 600px;
   border-radius: 4px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
@@ -712,12 +714,8 @@
   }
 }
 
-.pg-about-experience {
-  background: var(--color-bg-section);
-}
-
 .pg-about-mission {
-  background: var(--color-bg-dark);
+ background: var(--color-bg-section);
 }
 
 .pg-about-values {
