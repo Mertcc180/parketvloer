@@ -527,7 +527,6 @@
   }
 }
 
-/* Add animation for project cards */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -981,8 +980,8 @@
 
 /* Contact Form */
 .pg-contact-form {
-  padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg);
-  background: var(--color-bg-dark);
+  padding: var(--spacing-xl) var(--spacing-md);
+  min-height: 500px;
 }
 
 .pg-contact-form__inner {
@@ -990,10 +989,10 @@
   margin: 0 auto;
 }
 
-.pg-contact-form__title {
-  font-size: 1.2rem;
-  color: var(--color-text);
-  margin-bottom: var(--spacing-md);
+.nf-form-content {
+  padding: 0;
+  max-width: 100%;
+  min-height: 300px;
 }
 
 .pg-form {
@@ -1212,7 +1211,6 @@
   transition: all 0.3s ease;
 }
 
-/* Mobile Menu States */
 .pg-header__mobile-toggle.is-active span:nth-child(1) {
   transform: translateY(9px) rotate(45deg);
 }
@@ -1225,7 +1223,6 @@
   transform: translateY(-9px) rotate(-45deg);
 }
 
-/* Update existing media queries */
 @media (max-width: 1024px) {
   .pg-header__mobile-toggle {
     display: flex;
@@ -1235,13 +1232,13 @@
   .pg-header__nav {
     position: fixed;
     top: 0;
-    left: 0; /* Change from right: -100% to left: 0 */
-    width: 100%; /* Change from 80% to 100% */
-    max-width: none; /* Remove max-width constraint */
+    left: 0;
+    width: 100%;
+    max-width: none;
     height: 100vh;
     background: var(--color-bg-dark);
     padding: 100px 2rem 2rem;
-    transform: translateX(100%); /* Use transform instead of right property */
+    transform: translateX(100%);
     transition: transform 0.3s ease;
     z-index: 1000;
     display: flex;
@@ -1250,49 +1247,47 @@
   }
 
   .pg-header__nav.is-active {
-    transform: translateX(0); /* Slide in from right */
+    transform: translateX(0);
   }
 
   .pg-nav {
     flex-direction: column;
-    align-items: center; /* Center align items */
+    align-items: center;
     justify-content: center;
-    gap: 2rem; /* Increase gap between items */
+    gap: 2rem;
     width: 100%;
   }
 
   .pg-nav__item {
     width: 100%;
-    text-align: center; /* Center align text */
+    text-align: center;
   }
 
   .pg-nav__item a {
-    display: inline-block; /* Change from block to inline-block */
+    display: inline-block;
     padding: 1rem 0;
     font-size: 1.5rem;
-    position: relative; /* Add this */
+    position: relative;
   }
 
-  /* Update underline animation for mobile */
   .pg-nav__item a::after {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 50%; /* Center the underline */
+    left: 50%;
     width: 0;
     height: 2px;
     background: var(--color-accent);
-    transition: width 0.3s ease, left 0.3s ease; /* Add left transition */
-    transform: translateX(-50%); /* Center the underline */
+    transition: width 0.3s ease, left 0.3s ease;
+    transform: translateX(-50%);
   }
 
   .pg-nav__item a:hover::after,
   .pg-nav__item--active a::after {
     width: 100%;
-    left: 50%; /* Keep centered while expanding */
+    left: 50%;
   }
 
-  /* Keep CTA button styling */
   .pg-nav__item--cta .pg-btn--mobile {
     display: inline-block;
     width: auto;
@@ -1302,10 +1297,9 @@
   }
 
   .pg-nav__item--cta .pg-btn--mobile::after {
-    display: none; /* Remove underline from CTA button */
+    display: none;
   }
 
-  /* Overlay styles */
   .pg-header__overlay {
     position: fixed;
     top: 0;
@@ -1530,5 +1524,171 @@
   .pg-cta__text {
     font-size: 1rem;
     padding: 0 1rem;
+  }
+}
+
+.nf-form-content {
+  padding: 0;
+  max-width: 100%;
+}
+
+.nf-form-fields-required {
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-md);
+  font-size: 0.9rem;
+}
+
+.nf-field-container {
+  margin-bottom: var(--spacing-md) !important;
+}
+
+.nf-field-label label {
+  font-weight: 500 !important;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.nf-field-element input,
+.nf-field-element select,
+.nf-field-element textarea {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px !important;
+  color: var(--color-text) !important;
+  padding: 12px 15px !important;
+  transition: all 0.3s ease !important;
+  font-size: 1rem !important;
+}
+
+.nf-field-element input:focus,
+.nf-field-element select:focus,
+.nf-field-element textarea:focus {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 1px var(--color-accent) !important;
+  outline: none !important;
+}
+
+.nf-field-element textarea {
+  height: 150px !important;
+}
+
+.checkbox-wrap .nf-field-element label::before,
+.radio-wrap .nf-field-element label::before {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.checkbox-wrap .nf-field-label label,
+.radio-wrap .nf-field-label label {
+  color: var(--color-text-muted) !important;
+}
+
+.submit-wrap .nf-field-element input[type="button"] {
+  background: var(--color-accent) !important;
+  color: #000 !important;
+  padding: 15px 30px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  font-size: 1rem !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2) !important;
+}
+
+.submit-wrap .nf-field-element input[type="button"]:hover {
+  background: var(--color-accent-hover) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4) !important;
+}
+
+.nf-response-msg {
+  padding: var(--spacing-md);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--color-accent);
+  border-radius: 6px;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-accent);
+}
+
+.nf-form-wrap.ninja-forms-form-wrap {
+  min-height: 300px;
+}
+
+.pg-form {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pg-contact-form {
+    padding: var(--spacing-lg) var(--spacing-sm);
+    min-height: 400px;
+  }
+
+  .pg-form {
+    min-height: 300px;
+  }
+}
+
+.nf-form-content .submit-container input[type="button"],
+#nf-field-4 {
+  background-color: var(--color-accent) !important;
+  color: #000 !important;
+  padding: 1rem 2.5rem !important;
+  font-size: 1.05rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  border: none !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 1rem !important;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3) !important;
+}
+
+.nf-form-content .submit-container input[type="button"]:hover,
+#nf-field-4:hover {
+  background-color: var(--color-accent-hover) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5) !important;
+}
+
+.nf-form-content .submit-container input[type="button"]:active,
+#nf-field-4:active {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.4) !important;
+}
+
+/* Loading State */
+.nf-form-content .submit-container input[type="button"].disabled,
+#nf-field-4.disabled {
+  opacity: 0.7 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Focus State */
+.nf-form-content .submit-container input[type="button"]:focus,
+#nf-field-4:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.4),
+    0 4px 15px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .nf-form-content .submit-container input[type="button"],
+  #nf-field-4 {
+    padding: 0.85rem 2rem !important;
+    font-size: 1rem !important;
   }
 }
