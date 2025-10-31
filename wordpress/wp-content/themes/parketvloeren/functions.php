@@ -309,3 +309,8 @@ add_filter( 'wp_page_menu_args', function( $args ) {
 	}
 	return $args;
 } );
+
+function add_mobile_menu_script() {
+    wp_enqueue_script('mobile-menu', get_stylesheet_directory_uri() . '/assets/js/mobile-menu.js', array(), '1.0', true);
+}
+add_action('wp_enqueue_scripts', 'add_mobile_menu_script');
