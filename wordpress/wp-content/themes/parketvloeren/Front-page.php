@@ -237,20 +237,32 @@ $contact_phone   = get_field('contact_phone', $page_id);
             <div class="pg-grid pg-grid--3 pg-projects__grid">
                 <?php if ($has_p1): ?>
                     <article class="pg-project">
-                        <div class="pg-project__media" style="<?php echo esc_attr($proj1_style); ?>"></div>
-                        <?php if ($proj1_title): ?><h3 class="pg-project__title"><?php echo esc_html($proj1_title); ?></h3><?php endif; ?>
+                        <?php if ($proj1_url): ?>
+                            <div class="pg-project__media" style="background-image: url('<?php echo esc_url($proj1_url); ?>')"></div>
+                        <?php endif; ?>
+                        <?php if ($proj1_title): ?>
+                            <h3 class="pg-project__title"><?php echo esc_html($proj1_title); ?></h3>
+                        <?php endif; ?>
                     </article>
                 <?php endif; ?>
                 <?php if ($has_p2): ?>
                     <article class="pg-project">
-                        <div class="pg-project__media" style="<?php echo esc_attr($proj2_style); ?>"></div>
-                        <?php if ($proj2_title): ?><h3 class="pg-project__title"><?php echo esc_html($proj2_title); ?></h3><?php endif; ?>
+                        <?php if ($proj2_url): ?>
+                            <div class="pg-project__media" style="background-image: url('<?php echo esc_url($proj2_url); ?>')"></div>
+                        <?php endif; ?>
+                        <?php if ($proj2_title): ?>
+                            <h3 class="pg-project__title"><?php echo esc_html($proj2_title); ?></h3>
+                        <?php endif; ?>
                     </article>
                 <?php endif; ?>
                 <?php if ($has_p3): ?>
                     <article class="pg-project">
-                        <div class="pg-project__media" style="<?php echo esc_attr($proj3_style); ?>"></div>
-                        <?php if ($proj3_title): ?><h3 class="pg-project__title"><?php echo esc_html($proj3_title); ?></h3><?php endif; ?>
+                        <?php if ($proj3_url): ?>
+                            <div class="pg-project__media" style="background-image: url('<?php echo esc_url($proj3_url); ?>')"></div>
+                        <?php endif; ?>
+                        <?php if ($proj3_title): ?>
+                            <h3 class="pg-project__title"><?php echo esc_html($proj3_title); ?></h3>
+                        <?php endif; ?>
                     </article>
                 <?php endif; ?>
             </div>
