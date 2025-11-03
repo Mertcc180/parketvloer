@@ -415,8 +415,8 @@
 .pg-projects {
   padding-top: 2rem;
   background: var(--color-bg-dark);
-  min-height: auto; 
-  padding-bottom: 2rem; 
+  min-height: auto;
+  padding-bottom: 2rem;
 }
 
 .pg-projects .pg-section__inner {
@@ -792,6 +792,101 @@
     max-width: 100%;
   }
 }
+
+
+.pg-about-experience {
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: var(--color-bg-section);
+}
+
+.pg-about-experience .pg-about-section__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pg-about-experience .pg-about-section__content {
+  max-width: 100%;
+}
+
+.pg-about-experience .pg-about-section__title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-md);
+  text-align: left;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+
+.pg-about-experience .pg-about-section__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--color-accent);
+}
+
+.pg-about-experience__wrapper {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+  margin-top: var(--spacing-md);
+}
+
+.pg-about-experience__text {
+  padding-right: var(--spacing-sm);
+}
+
+.pg-about-experience__text .pg-about-section__text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 0;
+  margin-top: 0.5rem;
+}
+
+.pg-about-experience__image {
+  position: relative;
+  max-width: 400px;
+  margin-top: 0.5rem;
+}
+
+.pg-about-experience__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+  aspect-ratio: 4/3;
+}
+
+@media (max-width: 968px) {
+  .pg-about-experience__wrapper {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .pg-about-experience__text {
+    padding-right: 0;
+  }
+
+  .pg-about-experience__image {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .pg-about-experience .pg-about-section__title {
+    text-align: center;
+  }
+
+  .pg-about-experience .pg-about-section__title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 
 .pg-about-experience {
   background: var(--color-bg-section);
@@ -1497,8 +1592,8 @@
   text-align: center;
   padding: 2rem 2rem;
   background: var(--color-bg-dark);
-  padding-top: 2rem; 
-  margin-top: 0; 
+  padding-top: 2rem;
+  margin-top: 0;
 }
 
 .pg-cta__text {
