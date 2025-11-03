@@ -250,7 +250,7 @@
 
 /* SECTIONS */
 .pg-section {
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: var(--spacing-md);
   background: var(--color-bg-section);
   position: relative;
 }
@@ -413,15 +413,16 @@
 
 /* PROJECTS */
 .pg-projects {
-  padding-top: 120px;
+  padding-top: 2rem;
   background: var(--color-bg-dark);
-  min-height: 100vh;
+  min-height: auto; 
+  padding-bottom: 2rem; 
 }
 
 .pg-projects .pg-section__inner {
   max-width: 1400px;
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: 2rem var(--spacing-md);
 }
 
 .pg-projects .pg-section__title {
@@ -1494,8 +1495,10 @@
 /* Update CTA section styles */
 .pg-cta {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
   background: var(--color-bg-dark);
+  padding-top: 2rem; 
+  margin-top: 0; 
 }
 
 .pg-cta__text {
@@ -1624,7 +1627,6 @@
   flex-direction: column;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .pg-contact-form {
     padding: var(--spacing-lg) var(--spacing-sm);
