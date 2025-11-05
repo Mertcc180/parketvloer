@@ -77,28 +77,6 @@ $allowed_map = $allowed_iframe + [
         </div>
     </section>
 
-    <section class="pg-contact-form">
-        <div class="pg-contact-form__inner">
-            <?php if ($form_title): ?>
-                <h2 class="pg-contact-form__title"><?php echo esc_html($form_title); ?></h2>
-            <?php endif; ?>
-
-            <div class="pg-form">
-                <?php
-                // Render Ninja Forms zonder afhankelijk te zijn van een ACF-shortcode veld.
-                $id = $form_id > 0 ? absint($form_id) : 1;
-                $html = do_shortcode('[ninja_form id="' . $id . '"]');
-
-                if ( trim( $html ) ) {
-                    echo $html;
-                } else {
-                    echo '<p class="pg-form__notice">Formulier niet gevonden. Controleer of Ninja Forms actief is en het formulier-ID bestaat.</p>';
-                }
-                ?>
-            </div>
-        </div>
-    </section>
-
     <section class="pg-contact-info">
         <div class="pg-contact-info__inner">
             <div class="pg-contact-details">
@@ -190,6 +168,28 @@ $allowed_map = $allowed_iframe + [
                     </div>
                 </div>
             <?php endif; ?>
+        </div>
+    </section>
+
+    <section class="pg-contact-form">
+        <div class="pg-contact-form__inner">
+            <?php if ($form_title): ?>
+                <h2 class="pg-contact-form__title"><?php echo esc_html($form_title); ?></h2>
+            <?php endif; ?>
+
+            <div class="pg-form">
+                <?php
+                // Render Ninja Forms zonder afhankelijk te zijn van een ACF-shortcode veld.
+                $id = $form_id > 0 ? absint($form_id) : 1;
+                $html = do_shortcode('[ninja_form id="' . $id . '"]');
+
+                if ( trim( $html ) ) {
+                    echo $html;
+                } else {
+                    echo '<p class="pg-form__notice">Formulier niet gevonden. Controleer of Ninja Forms actief is en het formulier-ID bestaat.</p>';
+                }
+                ?>
+            </div>
         </div>
     </section>
 </main>
