@@ -27,28 +27,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <main class="pg-projects" style="padding-top:120px;">
     <div class="pg-section__inner">
-        <h1 class="pg-section__title">Onze Projecten</h1>
-        <p style="text-align:center; color:#b0b0b0; margin-bottom:2.5rem;">Neem een kijkje in ons recente werk</p>
+        <?php
+        // Haal de titel en subtitel uit ACF, met fallback tekst
+        $projecten_titel = get_field('projecten_titel');
+        $projecten_subtitel = get_field('projecten_subtitel');
+        ?>
+        <?php if($projecten_titel): ?>
+            <h1 class="pg-section__title"><?php echo esc_html($projecten_titel); ?></h1>
+        <?php endif; ?>
+        <?php if($projecten_subtitel): ?>
+            <p style="text-align:center; color:#b0b0b0; margin-bottom:2.5rem;"><?php echo esc_html($projecten_subtitel); ?></p>
+        <?php endif; ?>
         <div class="pg-grid pg-grid--3">
             <?php
             $heeft_projecten = false;
-            for($i = 1; $i <= 6; $i++) {
-                $afbeelding = get_field('afbeelding_' . $i);
-                $titel = get_field('titel_' . $i);
-                $afbeelding_url = '';
-                if (is_array($afbeelding) && !empty($afbeelding['url'])) {
-                    $afbeelding_url = $afbeelding['url'];
-                }
-                if($afbeelding_url && $titel):
-                    $heeft_projecten = true;
+            if( have_rows('projecten') ):
+                $heeft_projecten = true;
+                while( have_rows('projecten') ): the_row();
+                    $afbeelding = get_sub_field('afbeelding');
+                    $titel = get_sub_field('titel');
+                    $afbeelding_url = '';
+                    if (is_array($afbeelding) && !empty($afbeelding['url'])) {
+                        $afbeelding_url = $afbeelding['url'];
+                    }
+                    if($afbeelding_url && $titel):
             ?>
                 <div class="pg-project">
                     <div class="pg-project__media" style="background-image:url('<?php echo esc_url($afbeelding_url); ?>');"></div>
                     <div class="pg-project__title"><?php echo esc_html($titel); ?></div>
                 </div>
             <?php
-                endif;
-            }
+                    endif;
+                endwhile;
+            endif;
             ?>
         </div>
         <?php if(!$heeft_projecten): ?>
