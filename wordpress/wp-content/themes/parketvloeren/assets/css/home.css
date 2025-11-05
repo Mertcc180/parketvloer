@@ -144,7 +144,7 @@
 
 .pg-btn--header:hover {
   background: var(--color-accent-hover);
-  color: #fff; 
+  color: #fff;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
 }
@@ -867,6 +867,16 @@
   background: rgba(212, 175, 55, 0.1);
   border-radius: 50%;
   color: var(--color-accent);
+}
+
+.pg-about-value__icon img.pg-icon {
+  display: block;
+  margin: auto;
+  max-width: 60%;
+  max-height: 60%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 .pg-about-value__title {
@@ -1824,4 +1834,14 @@
   max-width: 100% !important;
   margin-top: 1rem !important;
   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3) !important;
+}
+
+.service-icon img {
+  display: block;
+  margin: auto;
+  max-width: 60%;
+  max-height: 60%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
