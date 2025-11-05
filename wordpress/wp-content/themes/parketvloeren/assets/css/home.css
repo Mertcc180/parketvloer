@@ -1725,3 +1725,13 @@
   margin-top: 1rem !important;
   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3) !important;
 }
+
+.service-icon img {
+  display: block;
+  margin: auto;
+  max-width: 60%;
+  max-height: 60%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
