@@ -472,7 +472,7 @@
 
 .pg-project__media {
   position: relative;
-  height: 280px;
+  height: 340px; /* groter thumbnails zodat afbeeldingen duidelijker zichtbaar zijn */
   background-size: cover;
   background-position: center;
   border-radius: 12px 12px 0 0;
@@ -521,7 +521,7 @@
   }
 
   .pg-project__media {
-    height: 220px;
+    height: 260px;
   }
 
   .pg-project__title {
@@ -666,9 +666,10 @@
   padding-top: 112px;
 }
 
+
 .pg-about-hero {
-  background: var(--color-bg-dark);
-  padding: var(--spacing-xl) var(--spacing-md);
+  background: #181824;
+  padding: calc(var(--spacing-xl) * 1.4) var(--spacing-md);
   text-align: center;
 }
 
@@ -695,7 +696,7 @@
 
 /* About Sections */
 .pg-about-section {
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: calc(var(--spacing-xl) * 1.4) var(--spacing-md);
   position: relative;
 }
 
@@ -720,7 +721,7 @@
 }
 
 .pg-about-section__content {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -729,13 +730,13 @@
   color: var(--color-accent);
   margin-bottom: var(--spacing-md);
   font-weight: 700;
-  text-align: center;
+  text-align: left;
 }
 
 .pg-about-section__text {
   color: var(--color-text-muted);
   line-height: 1.7;
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-size: clamp(1rem, 2vw, 1.2rem);
   margin-bottom: var(--spacing-md);
 }
 
@@ -841,7 +842,7 @@
 }
 
 .pg-about-mission {
-  background: var(--color-bg-dark);
+ background: var(--color-bg-section);
 }
 
 .pg-about-values {
@@ -1003,6 +1004,115 @@
     height: 70px;
   }
 }
+
+
+/* Project lightbox styles */
+.pg-lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background: rgba(0,0,0,0.88);
+  z-index: 2000;
+  overflow-y: auto;
+}
+
+.pg-lightbox--visible {
+  display: block;
+}
+
+.pg-lightbox__stage {
+  position: relative;
+  margin: 60px auto 40px auto;
+  max-width: 900px;
+  width: 90vw;
+  min-height: 60vh;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.pg-lightbox__img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 70vh;
+  min-height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  background: #000;
+  object-fit: contain;
+  transition: none;
+}
+
+.pg-lightbox__counter {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  color: #fff;
+  font-weight: 600;
+  background: rgba(0,0,0,0.4);
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  z-index: 2;
+}
+
+.pg-lightbox__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  color: #fff;
+  background: rgba(0,0,0,0.3);
+  border: 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.pg-lightbox__nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pg-lightbox__arrow {
+  pointer-events: auto;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 32px;
+  padding: 14px;
+  cursor: pointer;
+  margin: 0 8px;
+  transition: color 0.2s;
+}
+
+.pg-lightbox__arrow:hover {
+  color: #ccc; /* iets lichter pijltje bij hover */
+}
+
+@media (max-width:768px){
+
+  .pg-lightbox__arrow{font-size:22px;padding:10px}
+
+  .pg-lightbox__counter{font-size:0.9rem}
+  
+  .pg-lightbox__img{max-height:70vh}
+}
+
+
+
+
+
+
 
 /* CONTACT PAGE STYLES */
 
