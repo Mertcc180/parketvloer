@@ -1,14 +1,13 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-// Read ACF from the page with slug "header".
 $header_page = get_page_by_path( 'header' );
 $settings_id = $header_page ? $header_page->ID : 0;
 
-// Only these two fields + text for the button label.
-$logo      = $settings_id ? get_field( 'header_logo', $settings_id ) : null; // Image array
-$cta       = $settings_id ? get_field( 'header_cta', $settings_id ) : null;  // Link array
-$cta_text  = $settings_id ? get_field( 'header_cta_text', $settings_id ) : ''; // Text
+
+$logo      = $settings_id ? get_field( 'header_logo', $settings_id ) : null; 
+$cta_text  = $settings_id ? get_field( 'header_cta_text', $settings_id ) : ''; 
+$cta       = $settings_id ? get_field( 'header_cta', $settings_id ) : null;  
 
 $site_name     = get_bloginfo( 'name' );
 $logo_src      = is_array( $logo ) ? ( $logo['url'] ?? '' ) : '';
