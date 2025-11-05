@@ -10,13 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
         </div>
         <div class="pg-footer__cols">
             <div class="pg-footer__col">
-                <ul class="pg-footer__links">
-                    <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/over-ons' ) ); ?>">Over ons</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/Services' ) ); ?>">Services</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/projecten' ) ); ?>">Projecten</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a></li>
-                </ul>
+                <?php
+                wp_nav_menu([
+                    'theme_location' => 'footer_menu',
+                    'menu_class'     => 'pg-footer__links',
+                    'container'      => false
+                ]);
+                ?>
             </div>
             <div class="pg-footer__col">
                 <h4 class="pg-footer__heading">Contact info</h4>
