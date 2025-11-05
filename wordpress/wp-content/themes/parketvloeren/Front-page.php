@@ -67,52 +67,17 @@ $hero_bg        = get_field('hero_background', $page_id) ?: get_field('hero_acht
 $hero_bg_url    = $img_url($hero_bg);
 $hero_style     = $hero_bg_url ? "--hero-bg:url('".esc_url($hero_bg_url)."')" : '';
 
-// SECTION TITLES (ACF text fields)
+// BENEFITS (Repeater)
 $benefits_title = get_field('benefits_title', $page_id);
-$reviews_title  = get_field('reviews_title',  $page_id);
+$benefits = get_field('benefits', $page_id);
+
+// REVIEWS (Repeater)
+$reviews_title = get_field('reviews_title', $page_id);
+$reviews = get_field('reviews', $page_id);
+
+// PROJECTS (Repeater)
 $projects_title = get_field('projects_title', $page_id);
-
-// BENEFITS
-$benefit_1_title = get_field('benefit_1_title', $page_id);
-$benefit_1_text  = get_field('benefit_1_text', $page_id);
-$benefit_2_title = get_field('benefit_2_title', $page_id);
-$benefit_2_text  = get_field('benefit_2_text', $page_id);
-$benefit_3_title = get_field('benefit_3_title', $page_id);
-$benefit_3_text  = get_field('benefit_3_text', $page_id);
-$has_b1 = $benefit_1_title || $benefit_1_text;
-$has_b2 = $benefit_2_title || $benefit_2_text;
-$has_b3 = $benefit_3_title || $benefit_3_text;
-$has_benefits = $has_b1 || $has_b2 || $has_b3;
-
-// REVIEWS
-$review_1_text   = get_field('review_1_text', $page_id);
-$review_1_author = get_field('review_1_author', $page_id);
-$review_2_text   = get_field('review_2_text', $page_id);
-$review_2_author = get_field('review_2_author', $page_id);
-$review_3_text   = get_field('review_3_text', $page_id);
-$review_3_author = get_field('review_3_author', $page_id);
-$has_r1 = $review_1_text || $review_1_author;
-$has_r2 = $review_2_text || $review_2_author;
-$has_r3 = $review_3_text || $review_3_author;
-$has_reviews = $has_r1 || $has_r2 || $has_r3;
-
-// PROJECTS
-$proj1_img   = get_field('project_1_image', $page_id);
-$proj2_img   = get_field('project_2_image', $page_id);
-$proj3_img   = get_field('project_3_image', $page_id);
-$proj1_url   = $img_url($proj1_img);
-$proj2_url   = $img_url($proj2_img);
-$proj3_url   = $img_url($proj3_img);
-$proj1_style = $proj1_url ? "--img:url('".esc_url($proj1_url)."')" : '';
-$proj2_style = $proj2_url ? "--img:url('".esc_url($proj2_url)."')" : '';
-$proj3_style = $proj3_url ? "--img:url('".esc_url($proj3_url)."')" : '';
-$proj1_title = get_field('project_1_title', $page_id);
-$proj2_title = get_field('project_2_title', $page_id);
-$proj3_title = get_field('project_3_title', $page_id);
-$has_p1 = $proj1_url || $proj1_title;
-$has_p2 = $proj2_url || $proj2_title;
-$has_p3 = $proj3_url || $proj3_title;
-$has_projects = $has_p1 || $has_p2 || $has_p3;
+$projects = get_field('projects', $page_id);
 
 // CTA
 $cta_title      = get_field('cta_title', $page_id);
@@ -168,33 +133,34 @@ $contact_phone   = get_field('contact_phone', $page_id);
                 <h2 class="pg-section__title"><?php echo esc_html($benefits_title); ?></h2>
             <?php endif; ?>
             <div class="pg-grid pg-grid--3">
-                <?php if ($has_b1): ?>
+                <?php if ($benefits): foreach ($benefits as $b): ?>
                     <div class="pg-card pg-benefit">
                         <div class="pg-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 14 7 22l5-2 5 2-1.5-8"/></svg>
+                            <?php
+                            // Toon het geüploade icoon, anders een fallback SVG
+                            if (!empty($b['icon']['url'])) {
+                                // Optioneel: controleer of het een SVG is voor inline
+                                $icon_url = esc_url($b['icon']['url']);
+                                $icon_ext = pathinfo($icon_url, PATHINFO_EXTENSION);
+                                if ($icon_ext === 'svg') {
+                                    // SVG inline tonen
+                                    echo file_get_contents(ABSPATH . str_replace(site_url() . '/', '', $icon_url));
+                                } else {
+                                    // PNG/JPG als img
+                                    echo '<img src="' . $icon_url . '" alt="" style="width:32px;height:32px;">';
+                                }
+                            } else {
+                                // Fallback SVG
+                                ?>
+                                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 14 7 22l5-2 5 2-1.5-8"/></svg>
+                                <?php
+                            }
+                            ?>
                         </div>
-                        <?php if ($benefit_1_title): ?><h3 class="pg-card__title"><?php echo esc_html($benefit_1_title); ?></h3><?php endif; ?>
-                        <?php if ($benefit_1_text):  ?><p class="pg-card__text"><?php echo esc_html($benefit_1_text); ?></p><?php endif; ?>
+                        <?php if ($b['title']): ?><h3 class="pg-card__title"><?php echo esc_html($b['title']); ?></h3><?php endif; ?>
+                        <?php if ($b['text']):  ?><p class="pg-card__text"><?php echo esc_html($b['text']); ?></p><?php endif; ?>
                     </div>
-                <?php endif; ?>
-                <?php if ($has_b2): ?>
-                    <div class="pg-card pg-benefit">
-                        <div class="pg-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5l7-3z"/></svg>
-                        </div>
-                        <?php if ($benefit_2_title): ?><h3 class="pg-card__title"><?php echo esc_html($benefit_2_title); ?></h3><?php endif; ?>
-                        <?php if ($benefit_2_text):  ?><p class="pg-card__text"><?php echo esc_html($benefit_2_text); ?></p><?php endif; ?>
-                    </div>
-                <?php endif; ?>
-                <?php if ($has_b3): ?>
-                    <div class="pg-card pg-benefit">
-                        <div class="pg-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 6.6a5 5 0 0 0-7.1 0L12 8.3l-1.7-1.7a5 5 0 0 0-7.1 7.1l8.8 8.8 8.8-8.8a5 5 0 0 0 0-7.1z"/></svg>
-                        </div>
-                        <?php if ($benefit_3_title): ?><h3 class="pg-card__title"><?php echo esc_html($benefit_3_title); ?></h3><?php endif; ?>
-                        <?php if ($benefit_3_text):  ?><p class="pg-card__text"><?php echo esc_html($benefit_3_text); ?></p><?php endif; ?>
-                    </div>
-                <?php endif; ?>
+                <?php endforeach; endif; ?>
             </div>
         </div>
     </section>
@@ -206,24 +172,12 @@ $contact_phone   = get_field('contact_phone', $page_id);
                 <h2 class="pg-section__title"><?php echo esc_html($reviews_title); ?></h2>
             <?php endif; ?>
             <div class="pg-grid pg-grid--3">
-                <?php if ($has_r1): ?>
+                <?php if ($reviews): foreach ($reviews as $r): ?>
                     <blockquote class="pg-quote">
-                        <?php if ($review_1_text): ?><p><?php echo esc_html($review_1_text); ?></p><?php endif; ?>
-                        <?php if ($review_1_author): ?><footer>— <?php echo esc_html($review_1_author); ?></footer><?php endif; ?>
+                        <?php if ($r['text']): ?><p><?php echo esc_html($r['text']); ?></p><?php endif; ?>
+                        <?php if ($r['author']): ?><footer>— <?php echo esc_html($r['author']); ?></footer><?php endif; ?>
                     </blockquote>
-                <?php endif; ?>
-                <?php if ($has_r2): ?>
-                    <blockquote class="pg-quote">
-                        <?php if ($review_2_text): ?><p><?php echo esc_html($review_2_text); ?></p><?php endif; ?>
-                        <?php if ($review_2_author): ?><footer>— <?php echo esc_html($review_2_author); ?></footer><?php endif; ?>
-                    </blockquote>
-                <?php endif; ?>
-                <?php if ($has_r3): ?>
-                    <blockquote class="pg-quote">
-                        <?php if ($review_3_text): ?><p><?php echo esc_html($review_3_text); ?></p><?php endif; ?>
-                        <?php if ($review_3_author): ?><footer>— <?php echo esc_html($review_3_author); ?></footer><?php endif; ?>
-                    </blockquote>
-                <?php endif; ?>
+                <?php endforeach; endif; ?>
             </div>
         </div>
     </section>
@@ -235,24 +189,19 @@ $contact_phone   = get_field('contact_phone', $page_id);
                 <h2 class="pg-section__title"><?php echo esc_html($projects_title); ?></h2>
             <?php endif; ?>
             <div class="pg-grid pg-grid--3 pg-projects__grid">
-                <?php if ($has_p1): ?>
+                <?php if ($projects): foreach ($projects as $p): 
+                    $img_url = '';
+                    if (is_array($p['image']) && !empty($p['image']['url'])) $img_url = $p['image']['url'];
+                    ?>
                     <article class="pg-project">
-                        <div class="pg-project__media" style="<?php echo esc_attr($proj1_style); ?>"></div>
-                        <?php if ($proj1_title): ?><h3 class="pg-project__title"><?php echo esc_html($proj1_title); ?></h3><?php endif; ?>
+                        <?php if ($img_url): ?>
+                            <div class="pg-project__media" style="background-image: url('<?php echo esc_url($img_url); ?>')"></div>
+                        <?php endif; ?>
+                        <?php if ($p['title']): ?>
+                            <h3 class="pg-project__title"><?php echo esc_html($p['title']); ?></h3>
+                        <?php endif; ?>
                     </article>
-                <?php endif; ?>
-                <?php if ($has_p2): ?>
-                    <article class="pg-project">
-                        <div class="pg-project__media" style="<?php echo esc_attr($proj2_style); ?>"></div>
-                        <?php if ($proj2_title): ?><h3 class="pg-project__title"><?php echo esc_html($proj2_title); ?></h3><?php endif; ?>
-                    </article>
-                <?php endif; ?>
-                <?php if ($has_p3): ?>
-                    <article class="pg-project">
-                        <div class="pg-project__media" style="<?php echo esc_attr($proj3_style); ?>"></div>
-                        <?php if ($proj3_title): ?><h3 class="pg-project__title"><?php echo esc_html($proj3_title); ?></h3><?php endif; ?>
-                    </article>
-                <?php endif; ?>
+                <?php endforeach; endif; ?>
             </div>
         </div>
     </section>
