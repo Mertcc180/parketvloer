@@ -314,3 +314,79 @@ function add_mobile_menu_script() {
     wp_enqueue_script('mobile-menu', get_stylesheet_directory_uri() . '/assets/js/mobile-menu.js', array(), '1.0', true);
 }
 add_action('wp_enqueue_scripts', 'add_mobile_menu_script');
+
+add_action('after_setup_theme', function () {
+    register_nav_menus([
+        'header_menu' => __('Header Menu', 'parketvloeren'),
+        'footer_menu' => __('Footer Menu', 'parketvloeren'),
+    ]);
+});
+
+// Use your custom header partial instead of Astra’s default header.
+add_action('init', function () {
+    if ( function_exists('astra_header_markup') ) {
+        remove_action('astra_header', 'astra_header_markup');
+    }
+    add_action('astra_header', function () {
+        locate_template(['pg-header.php'], true, false);
+    }, 0);
+});
+
+// Add your header menu classes so existing CSS keeps working.
+add_filter('nav_menu_css_class', function ($classes, $item, $args) {
+    if (!empty($args->theme_location) && $args->theme_location === 'header_menu') {
+        $classes[] = 'pg-nav__item';
+        if (in_array('current-menu-item', $classes, true) ||
+            in_array('current-menu-ancestor', $classes, true) ||
+            in_array('current_page_parent', $classes, true)) {
+            $classes[] = 'pg-nav__item--active';
+        }
+        if (in_array('menu-item-cta', $item->classes ?? [], true)) {
+            $classes[] = 'pg-nav__item--cta';
+        }
+        if (in_array('menu-item-logo', $item->classes ?? [], true)) {
+            $classes[] = 'pg-nav__item--logo';
+        }
+    }
+    return $classes;
+}, 10, 3);
+
+// Replace the anchor output for logo & CTA items in the Header Menu.
+add_filter('walker_nav_menu_start_el', function ($item_output, $item, $depth, $args) {
+    if (empty($args->theme_location) || $args->theme_location !== 'header_menu') {
+        return $item_output;
+    }
+
+    // Logo item -> render image linking to home.
+    if (in_array('menu-item-logo', $item->classes ?? [], true)) {
+        $logo_url = get_stylesheet_directory_uri() . '/assets/images/logo2.png';
+        $site_name = get_bloginfo('name');
+        return sprintf(
+            '<a class="pg-nav__logo" href="%s" aria-label="%s"><img src="%s" alt="%s"></a>',
+            esc_url(home_url('/')),
+            esc_attr($site_name),
+            esc_url($logo_url),
+            esc_attr($site_name)
+        );
+    }
+
+    // CTA item -> render as button-styled link.
+    if (in_array('menu-item-cta', $item->classes ?? [], true)) {
+        return sprintf(
+            '<a class="pg-btn pg-btn--header" href="%s">%s</a>',
+            esc_url($item->url),
+            esc_html($item->title)
+        );
+    }
+
+    return $item_output;
+}, 10, 4);
+
+add_action('init', function () {
+    if (function_exists('astra_header_markup')) {
+        remove_action('astra_header', 'astra_header_markup');
+    }
+    add_action('astra_header', function () {
+        locate_template(['pg-header.php'], true, false);
+    }, 0);
+});
