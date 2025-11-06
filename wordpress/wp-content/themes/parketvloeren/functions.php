@@ -390,3 +390,16 @@ add_action('init', function () {
         locate_template(['pg-header.php'], true, false);
     }, 0);
 });
+
+add_action( 'wp_enqueue_scripts', function () {
+    if ( is_page_template( 'page-services.php' ) ) {
+        $ver = wp_get_theme()->get( 'Version' );
+        wp_enqueue_script(
+            'parketvloeren-services-scroll',
+            get_stylesheet_directory_uri() . '/assets/js/services-scroll.js',
+            array(),
+            $ver,
+            true
+        );
+    }
+}, 25 );
