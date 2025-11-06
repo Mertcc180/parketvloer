@@ -259,7 +259,7 @@
 }
 
 .pg-section:nth-child(even) {
-  background: var(--color-bg-dark);
+  background: var(--color-bg-section);
 }
 
 .pg-section::before {
@@ -669,7 +669,6 @@
 }
 
 .pg-about-hero {
-  background: #181824;
   padding: calc(var(--spacing-xl) * 1.4) var(--spacing-md);
   text-align: center;
 }
@@ -731,7 +730,7 @@
   color: var(--color-accent);
   margin-bottom: var(--spacing-md);
   font-weight: 700;
-  text-align: left;
+  text-align: center;
 }
 
 .pg-about-section__text {
@@ -844,6 +843,16 @@
 
 .pg-about-mission {
   background: var(--color-bg-section);
+}
+
+.pg-about-section.pg-about-mission {
+  background-color: var(--color-bg-dark);
+  color: #ffffff;
+}
+
+.pg-about-section.pg-about-mission .pg-about-section__text,
+.pg-about-section.pg-about-mission .pg-about-value__text {
+  color: #ffffff;
 }
 
 .pg-about-values {
