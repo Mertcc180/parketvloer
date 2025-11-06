@@ -30,6 +30,7 @@
     Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
   color: var(--color-text);
+  scroll-behavior: smooth;
 }
 
 .pg-home,
@@ -312,14 +313,15 @@
 }
 
 .pg-card {
-  background: rgba(255, 255, 255, 0.03);
-  padding: var(--spacing-lg);
-  border-radius: 12px;
+  display: block;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 8px;
   text-align: center;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
   border: 1px solid rgba(212, 175, 55, 0.1);
-  position: relative;
-  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
 }
 
 .pg-card::before {
@@ -1569,12 +1571,15 @@
 }
 
 .service-card {
+  display: block;
   background: rgba(255, 255, 255, 0.05);
   padding: 2rem;
   border-radius: 8px;
   text-align: center;
   transition: all 0.3s ease;
   border: 1px solid rgba(212, 175, 55, 0.1);
+  color: inherit;
+  text-decoration: none;
 }
 
 .service-card:hover {
@@ -1770,5 +1775,42 @@
   .service-detail-content p {
     text-align: center;
     width: 100%;
+  }
+}
+
+.pg-section.pg-cta .pg-section__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.pg-section.pg-cta .pg-btn {
+  align-self: center;
+}
+
+.pg-section.pg-cta .pg-cta__text {
+  max-width: 640px;
+}
+
+.services-details {
+  max-width: 1200px;
+  margin: 3rem auto 4rem;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.service-detail-section {
+  width: 100%;
+  scroll-margin-top: 140px;
+}
+
+@media (max-width: 768px) {
+  .services-details {
+    padding: 0 1rem 2rem;
+    gap: 1.5rem;
   }
 }
