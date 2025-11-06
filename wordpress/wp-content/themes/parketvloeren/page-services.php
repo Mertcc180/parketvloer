@@ -36,12 +36,11 @@ $show_cta_text    = $cta_text_clean !== '' && strcasecmp($cta_text_clean, 'Offer
     <div class="services-grid">
         <?php if (!empty($services_list)): ?>
             <?php foreach ($services_list as $idx => $service): ?>
-                <div class="service-card"
-                    data-idx="<?php echo esc_attr($idx); ?>"
-                    data-title="<?php echo esc_attr($service['service_detail_title'] ?? $service['service_title'] ?? ''); ?>"
-                    data-desc="<?php echo esc_attr($service['service_detail_text'] ?? $service['service_desc'] ?? ''); ?>"
-                    data-image="<?php echo !empty($service['service_detail_image']['url']) ? esc_url($service['service_detail_image']['url']) : ''; ?>"
-                >
+                <?php
+                    $service_detail_title = $service['service_detail_title'] ?? $service['service_title'] ?? '';
+                    $service_anchor       = 'service-detail-' . $idx;
+                ?>
+                <a class="service-card" href="#<?php echo esc_attr($service_anchor); ?>">
                     <span class="service-icon">
                         <?php if (!empty($service['service_icon'])): ?>
                             <img src="<?php echo esc_url($service['service_icon']['url']); ?>" alt="<?php echo esc_attr($service['service_title']); ?>" />
@@ -49,12 +48,38 @@ $show_cta_text    = $cta_text_clean !== '' && strcasecmp($cta_text_clean, 'Offer
                     </span>
                     <h3><?php echo esc_html($service['service_title'] ?? ''); ?></h3>
                     <p><?php echo esc_html($service['service_desc'] ?? ''); ?></p>
-                </div>
+                </a>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
 
-    <div id="expanded-service-card" class="expanded-service-card" style="display:none"></div>
+    <?php if (!empty($services_list)): ?>
+        <div class="services-details">
+            <?php foreach ($services_list as $idx => $service): ?>
+                <?php
+                    $service_detail_title = $service['service_detail_title'] ?? $service['service_title'] ?? '';
+                    $service_detail_text  = $service['service_detail_text'] ?? $service['service_desc'] ?? '';
+                    $service_detail_image = !empty($service['service_detail_image']['url']) ? $service['service_detail_image'] : null;
+                    $service_anchor       = 'service-detail-' . $idx;
+                ?>
+                <section id="<?php echo esc_attr($service_anchor); ?>" class="service-detail-section service-card service-card--expanded service-card--row">
+                    <?php if ($service_detail_image): ?>
+                        <div class="service-detail-img">
+                            <img src="<?php echo esc_url($service_detail_image['url']); ?>" alt="<?php echo esc_attr($service_detail_image['alt'] ?? $service_detail_title); ?>" />
+                        </div>
+                    <?php endif; ?>
+                    <div class="service-detail-content">
+                        <h3><?php echo esc_html($service_detail_title); ?></h3>
+                        <?php if (!empty($service['service_detail_text'])): ?>
+                            <?php echo wp_kses_post($service_detail_text); ?>
+                        <?php elseif (!empty($service_detail_text)): ?>
+                            <p><?php echo esc_html($service_detail_text); ?></p>
+                        <?php endif; ?>
+                    </div>
+                </section>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
     <div class="services-cta">
         <h4><?php echo esc_html($cta_title); ?></h4>
@@ -71,30 +96,3 @@ $show_cta_text    = $cta_text_clean !== '' && strcasecmp($cta_text_clean, 'Offer
 <?php wp_footer(); ?>
 </body>
 </html>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.service-card');
-    const expanded = document.getElementById('expanded-service-card');
-    cards.forEach(card => {
-        card.addEventListener('click', function() {
-            // Get data
-            const title = card.getAttribute('data-title');
-            const desc = card.getAttribute('data-desc');
-            const image = card.getAttribute('data-image');
-            // Build HTML
-            expanded.innerHTML = `
-    <div class="service-card service-card--expanded service-card--row">
-        ${image ? `<div class="service-detail-img"><img src="${image}" alt="${title}" /></div>` : ''}
-        <div class="service-detail-content">
-            <h3>${title}</h3>
-            <p>${desc}</p>
-        </div>
-    </div>
-`;
-            expanded.style.display = 'block';
-            expanded.scrollIntoView({behavior: 'smooth', block: 'center'});
-        });
-    });
-});
-</script>
