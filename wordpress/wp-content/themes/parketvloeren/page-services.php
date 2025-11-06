@@ -31,8 +31,13 @@ $services_list    = $has_acf ? get_field('services_list', $page_id) : [];
     <p class="services-intro"><?php echo esc_html($services_intro); ?></p>
     <div class="services-grid">
         <?php if (!empty($services_list)): ?>
-            <?php foreach ($services_list as $service): ?>
-                <div class="service-card">
+            <?php foreach ($services_list as $idx => $service): ?>
+                <div class="service-card"
+                    data-idx="<?php echo esc_attr($idx); ?>"
+                    data-title="<?php echo esc_attr($service['service_detail_title'] ?? $service['service_title'] ?? ''); ?>"
+                    data-desc="<?php echo esc_attr($service['service_detail_text'] ?? $service['service_desc'] ?? ''); ?>"
+                    data-image="<?php echo !empty($service['service_detail_image']['url']) ? esc_url($service['service_detail_image']['url']) : ''; ?>"
+                >
                     <span class="service-icon">
                         <?php if (!empty($service['service_icon'])): ?>
                             <img src="<?php echo esc_url($service['service_icon']['url']); ?>" alt="<?php echo esc_attr($service['service_title']); ?>" />
@@ -44,6 +49,9 @@ $services_list    = $has_acf ? get_field('services_list', $page_id) : [];
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
+
+    <div id="expanded-service-card" class="expanded-service-card" style="display:none"></div>
+
     <div class="services-cta">
         <h4><?php echo esc_html($cta_title); ?></h4>
         <p><?php echo esc_html($cta_text); ?></p>
@@ -57,3 +65,30 @@ $services_list    = $has_acf ? get_field('services_list', $page_id) : [];
 <?php wp_footer(); ?>
 </body>
 </html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.service-card');
+    const expanded = document.getElementById('expanded-service-card');
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Get data
+            const title = card.getAttribute('data-title');
+            const desc = card.getAttribute('data-desc');
+            const image = card.getAttribute('data-image');
+            // Build HTML
+            expanded.innerHTML = `
+    <div class="service-card service-card--expanded service-card--row">
+        ${image ? `<div class="service-detail-img"><img src="${image}" alt="${title}" /></div>` : ''}
+        <div class="service-detail-content">
+            <h3>${title}</h3>
+            <p>${desc}</p>
+        </div>
+    </div>
+`;
+            expanded.style.display = 'block';
+            expanded.scrollIntoView({behavior: 'smooth', block: 'center'});
+        });
+    });
+});
+</script>
