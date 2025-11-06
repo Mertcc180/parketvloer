@@ -1772,3 +1772,28 @@
     width: 100%;
   }
 }
+
+.pg-section.pg-cta .pg-section__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.pg-section.pg-cta .pg-btn {
+  align-self: center;
+}
+
+.pg-section.pg-cta .pg-cta__text {
+  max-width: 640px;
+}
+
+.services-cta {
+  text-align: center;
+}
+
+.services-cta .cta-btn {
+  display: inline-block;
+  margin: 0 auto;
+}

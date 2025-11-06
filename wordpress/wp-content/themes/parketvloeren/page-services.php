@@ -14,6 +14,10 @@ $cta_text         = $has_acf ? get_field('cta_text', $page_id) : '';
 $cta_button_text  = $has_acf ? get_field('cta_button_text', $page_id) : '';
 $cta_button_url   = $has_acf ? get_field('cta_button_url', $page_id) : '';
 $services_list    = $has_acf ? get_field('services_list', $page_id) : [];
+
+$cta_text_clean   = is_string($cta_text) ? trim($cta_text) : '';
+$show_cta_text    = $cta_text_clean !== '' && strcasecmp($cta_text_clean, 'Offerte aanvragen') !== 0;
+
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -54,7 +58,9 @@ $services_list    = $has_acf ? get_field('services_list', $page_id) : [];
 
     <div class="services-cta">
         <h4><?php echo esc_html($cta_title); ?></h4>
-        <p><?php echo esc_html($cta_text); ?></p>
+        <?php if ($show_cta_text): ?>
+            <p><?php echo esc_html($cta_text_clean); ?></p>
+        <?php endif; ?>
         <?php if ($cta_button_url && $cta_button_text): ?>
             <a href="<?php echo esc_url($cta_button_url); ?>" class="cta-btn"><?php echo esc_html($cta_button_text); ?></a>
         <?php endif; ?>

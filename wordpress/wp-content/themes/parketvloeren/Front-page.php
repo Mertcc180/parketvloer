@@ -87,6 +87,9 @@ $cta_btn_link   = get_field('cta_button_link', $page_id);
 $cta_link       = $link_resolve($cta_btn_link);
 $has_cta_btn    = $cta_btn_text && $cta_link['href'];
 
+$cta_text_clean = $cta_text ? trim($cta_text) : '';
+$show_cta_text  = $cta_text_clean !== '' && strcasecmp($cta_text_clean, 'Offerte aanvragen') !== 0;
+
 // FOOTER CONTACT
 $contact_city    = get_field('contact_city', $page_id);
 $contact_region  = get_field('contact_region', $page_id);
@@ -210,7 +213,7 @@ $contact_phone   = get_field('contact_phone', $page_id);
     <section class="pg-section pg-cta">
         <div class="pg-section__inner">
             <?php if ($cta_title): ?><h2 class="pg-section__title"><?php echo esc_html($cta_title); ?></h2><?php endif; ?>
-            <?php if ($cta_text):  ?><p class="pg-cta__text"><?php echo esc_html($cta_text); ?></p><?php endif; ?>
+            <?php if ($show_cta_text): ?><p class="pg-cta__text"><?php echo esc_html($cta_text_clean); ?></p><?php endif; ?>
             <?php if ($has_cta_btn): ?>
                 <a class="pg-btn pg-btn--primary" href="<?php echo esc_url($cta_link['href']); ?>"<?php echo $cta_link['target'] ? ' target="'.esc_attr($cta_link['target']).'" rel="noopener"' : ''; ?>>
                     <?php echo esc_html($cta_btn_text); ?>
