@@ -403,3 +403,16 @@ add_action( 'wp_enqueue_scripts', function () {
         );
     }
 }, 25 );
+
+add_action( 'wp_enqueue_scripts', function () {
+    if ( is_page_template( 'page-over-ons.php' ) ) {
+        $ver = wp_get_theme()->get( 'Version' );
+        wp_enqueue_script(
+            'parketvloeren-about-values-slider',
+            get_stylesheet_directory_uri() . '/assets/js/about-values-slider.js',
+            array(),
+            $ver,
+            true
+        );
+    }
+}, 25 );
