@@ -1,37 +1,53 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+$header_page = get_page_by_path( 'header' );
+$settings_id = $header_page ? $header_page->ID : 0;
+
+
+$logo      = $settings_id ? get_field( 'header_logo', $settings_id ) : null; 
+$cta_text  = $settings_id ? get_field( 'header_cta_text', $settings_id ) : ''; 
+$cta       = $settings_id ? get_field( 'header_cta', $settings_id ) : null;  
+
+$site_name     = get_bloginfo( 'name' );
+$logo_src      = is_array( $logo ) ? ( $logo['url'] ?? '' ) : '';
+$logo_alt_text = is_array( $logo ) && ! empty( $logo['alt'] ) ? $logo['alt'] : $site_name;
 ?>
 <header class="pg-header">
     <div class="pg-header__inner">
-        <div class="pg-header__logo">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo2.png' ); ?>" alt="Het Parket Gilde Logo" class="pg-header__logo-img">
-            </a>
-        </div>
-        
-        
+
+        <a class="pg-header__brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( $site_name ); ?>">
+            <?php if ( $logo_src ) : ?>
+                <img class="pg-header__logo-img" src="<?php echo esc_url( $logo_src ); ?>" alt="<?php echo esc_attr( $logo_alt_text ); ?>">
+            <?php else : ?>
+                <span class="pg-header__brand-text"><?php echo esc_html( $site_name ); ?></span>
+            <?php endif; ?>
+        </a>
+
         <button class="pg-header__mobile-toggle" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
 
-      
-        <nav class="pg-header__nav pg-header__mobile-nav">
-            <ul class="pg-nav">
-                <li class="pg-nav__item<?php if (is_front_page()) echo ' pg-nav__item--active'; ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
-                <li class="pg-nav__item<?php if (is_page('over-ons')) echo ' pg-nav__item--active'; ?>"><a href="<?php echo esc_url( home_url( '/over-ons' ) ); ?>">Over ons</a></li>
-                <li class="pg-nav__item<?php if (is_page('services') || is_page('diensten')) echo ' pg-nav__item--active'; ?>"><a href="<?php echo esc_url( home_url( '/services' ) ); ?>">Services</a></li>
-                <li class="pg-nav__item<?php if (is_page('projecten')) echo ' pg-nav__item--active'; ?>"><a href="<?php echo esc_url( home_url( '/projecten' ) ); ?>">Projecten</a></li>
-                <li class="pg-nav__item<?php if (is_page('contact')) echo ' pg-nav__item--active'; ?>"><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a></li>
-
-                <li class="pg-nav__item pg-nav__item--cta">
-                    <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="pg-btn pg-btn--mobile">Offerte aanvragen</a>
-                </li>
-            </ul>
+        <nav class="pg-header__nav pg-header__mobile-nav" aria-label="Hoofdmenu">
+            <?php
+            wp_nav_menu([
+                'theme_location' => 'header_menu',
+                'menu_class'     => 'pg-nav',
+                'container'      => false,
+                'fallback_cb'    => '__return_false',
+            ]);
+            ?>
         </nav>
-        <div class="pg-header__cta">
-            <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="pg-btn pg-btn--header">Offerte aanvragen</a>
-        </div>
+
+        <?php if ( is_array( $cta ) && ! empty( $cta['url'] ) ) : ?>
+            <div class="pg-header__cta">
+                <a class="pg-btn pg-btn--header"
+                   href="<?php echo esc_url( $cta['url'] ); ?>"
+                   <?php echo ! empty( $cta['target'] ) ? 'target="' . esc_attr( $cta['target'] ) . '"' : ''; ?>>
+                    <?php echo esc_html( $cta_text ?: ( $cta['title'] ?? '' ) ); ?>
+                </a>
+            </div>
+        <?php endif; ?>
+
     </div>
 </header>
