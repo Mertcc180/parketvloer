@@ -135,36 +135,45 @@ $contact_phone   = get_field('contact_phone', $page_id);
             <?php if ($benefits_title): ?>
                 <h2 class="pg-section__title"><?php echo esc_html($benefits_title); ?></h2>
             <?php endif; ?>
-            <div class="pg-grid pg-grid--3">
-                <?php if ($benefits): foreach ($benefits as $b): ?>
-                    <div class="pg-card pg-benefit">
-                        <div class="pg-icon" aria-hidden="true">
-                            <?php
-                            // Toon het geüploade icoon, anders een fallback SVG
-                            if (!empty($b['icon']['url'])) {
-                                // Optioneel: controleer of het een SVG is voor inline
-                                $icon_url = esc_url($b['icon']['url']);
-                                $icon_ext = pathinfo($icon_url, PATHINFO_EXTENSION);
-                                if ($icon_ext === 'svg') {
-                                    // SVG inline tonen
-                                    echo file_get_contents(ABSPATH . str_replace(site_url() . '/', '', $icon_url));
-                                } else {
-                                    // PNG/JPG als img
-                                    echo '<img src="' . $icon_url . '" alt="" style="width:32px;height:32px;">';
-                                }
-                            } else {
-                                // Fallback SVG
-                                ?>
-                                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 14 7 22l5-2 5 2-1.5-8"/></svg>
-                                <?php
-                            }
-                            ?>
+            <?php if ($benefits): ?>
+                <div class="pg-slider" data-per-desktop="3" data-per-tablet="2" data-per-mobile="1">
+                    <button class="pg-slider__nav pg-slider__nav--prev" type="button" aria-label="<?php esc_attr_e('Vorige voordeel','parketvloeren'); ?>">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+                    <div class="pg-slider__viewport">
+                        <div class="pg-slider__track">
+                            <?php foreach ($benefits as $b): ?>
+                                <div class="pg-slider__slide">
+                                    <div class="pg-card pg-benefit">
+                                        <div class="pg-icon" aria-hidden="true">
+                                            <?php
+                                            if (!empty($b['icon']['url'])) {
+                                                $icon_url = esc_url($b['icon']['url']);
+                                                $icon_ext = pathinfo($icon_url, PATHINFO_EXTENSION);
+                                                if ( $icon_ext === 'svg' && file_exists(ABSPATH . str_replace(site_url().'/', '', $icon_url)) ) {
+                                                    echo file_get_contents(ABSPATH . str_replace(site_url().'/', '', $icon_url));
+                                                } else {
+                                                    echo '<img src="'.$icon_url.'" alt="" style="width:32px;height:32px;">';
+                                                }
+                                            } else {
+                                                ?>
+                                                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 14 7 22l5-2 5 2-1.5-8"/></svg>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <?php if ($b['title']): ?><h3 class="pg-card__title"><?php echo esc_html($b['title']); ?></h3><?php endif; ?>
+                                        <?php if ($b['text']):  ?><p class="pg-card__text"><?php echo esc_html($b['text']); ?></p><?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
-                        <?php if ($b['title']): ?><h3 class="pg-card__title"><?php echo esc_html($b['title']); ?></h3><?php endif; ?>
-                        <?php if ($b['text']):  ?><p class="pg-card__text"><?php echo esc_html($b['text']); ?></p><?php endif; ?>
                     </div>
-                <?php endforeach; endif; ?>
-            </div>
+                    <button class="pg-slider__nav pg-slider__nav--next" type="button" aria-label="<?php esc_attr_e('Volgend voordeel','parketvloeren'); ?>">
+                        <span aria-hidden="true">›</span>
+                    </button>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 
@@ -174,14 +183,28 @@ $contact_phone   = get_field('contact_phone', $page_id);
             <?php if ($reviews_title): ?>
                 <h2 class="pg-section__title"><?php echo esc_html($reviews_title); ?></h2>
             <?php endif; ?>
-            <div class="pg-grid pg-grid--3">
-                <?php if ($reviews): foreach ($reviews as $r): ?>
-                    <blockquote class="pg-quote">
-                        <?php if ($r['text']): ?><p><?php echo esc_html($r['text']); ?></p><?php endif; ?>
-                        <?php if ($r['author']): ?><footer>— <?php echo esc_html($r['author']); ?></footer><?php endif; ?>
-                    </blockquote>
-                <?php endforeach; endif; ?>
-            </div>
+            <?php if ($reviews): ?>
+                <div class="pg-slider" data-per-desktop="3" data-per-tablet="2" data-per-mobile="1">
+                    <button class="pg-slider__nav pg-slider__nav--prev" type="button" aria-label="<?php esc_attr_e('Vorige review','parketvloeren'); ?>">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+                    <div class="pg-slider__viewport">
+                        <div class="pg-slider__track">
+                            <?php foreach ($reviews as $r): ?>
+                                <div class="pg-slider__slide">
+                                    <blockquote class="pg-quote">
+                                        <?php if ($r['text']): ?><p><?php echo esc_html($r['text']); ?></p><?php endif; ?>
+                                        <?php if ($r['author']): ?><footer>— <?php echo esc_html($r['author']); ?></footer><?php endif; ?>
+                                    </blockquote>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <button class="pg-slider__nav pg-slider__nav--next" type="button" aria-label="<?php esc_attr_e('Volgende review','parketvloeren'); ?>">
+                        <span aria-hidden="true">›</span>
+                    </button>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 
@@ -191,21 +214,35 @@ $contact_phone   = get_field('contact_phone', $page_id);
             <?php if ($projects_title): ?>
                 <h2 class="pg-section__title"><?php echo esc_html($projects_title); ?></h2>
             <?php endif; ?>
-            <div class="pg-grid pg-grid--3 pg-projects__grid">
-                <?php if ($projects): foreach ($projects as $p): 
-                    $img_url = '';
-                    if (is_array($p['image']) && !empty($p['image']['url'])) $img_url = $p['image']['url'];
-                    ?>
-                    <article class="pg-project">
-                        <?php if ($img_url): ?>
-                            <div class="pg-project__media" style="background-image: url('<?php echo esc_url($img_url); ?>')"></div>
-                        <?php endif; ?>
-                        <?php if ($p['title']): ?>
-                            <h3 class="pg-project__title"><?php echo esc_html($p['title']); ?></h3>
-                        <?php endif; ?>
-                    </article>
-                <?php endforeach; endif; ?>
-            </div>
+            <?php if ($projects): ?>
+                <div class="pg-slider" data-per-desktop="3" data-per-tablet="2" data-per-mobile="1">
+                    <button class="pg-slider__nav pg-slider__nav--prev" type="button" aria-label="<?php esc_attr_e('Vorige project','parketvloeren'); ?>">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+                    <div class="pg-slider__viewport">
+                        <div class="pg-slider__track">
+                            <?php foreach ($projects as $p): 
+                                $img_url = '';
+                                if (is_array($p['image']) && !empty($p['image']['url'])) $img_url = $p['image']['url'];
+                                ?>
+                                <div class="pg-slider__slide">
+                                    <article class="pg-project">
+                                        <?php if ($img_url): ?>
+                                            <div class="pg-project__media" style="background-image: url('<?php echo esc_url($img_url); ?>')"></div>
+                                        <?php endif; ?>
+                                        <?php if ($p['title']): ?>
+                                            <h3 class="pg-project__title"><?php echo esc_html($p['title']); ?></h3>
+                                        <?php endif; ?>
+                                    </article>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <button class="pg-slider__nav pg-slider__nav--next" type="button" aria-label="<?php esc_attr_e('Volgende project','parketvloeren'); ?>">
+                        <span aria-hidden="true">›</span>
+                    </button>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 
