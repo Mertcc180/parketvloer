@@ -241,6 +241,13 @@ add_action( 'wp_enqueue_scripts', function () {
             array(),
             $ver
         );
+        wp_enqueue_script(
+            'parketvloeren-sliders',
+            get_stylesheet_directory_uri() . '/assets/js/sliders.js',
+            array(),
+            $ver,
+            true
+        );
     }
 }, 20 );
 
