@@ -62,29 +62,47 @@ if ( ! defined( 'ABSPATH' ) ) {
     <!-- Mission and Values Section -->
     <section class="pg-about-section pg-about-mission">
         <div class="pg-about-section__inner">
-            <h2 class="pg-about-section__title"><?php echo esc_html(get_field('missie_title')); ?></h2>
+            <h2 class="pg-about-section__title"><?php echo esc_html( get_field( 'missie_title' ) ); ?></h2>
             <p class="pg-about-section__text pg-about-section__text--centered">
-                <?php echo esc_html(get_field('missie_text')); ?>
+                <?php echo esc_html( get_field( 'missie_text' ) ); ?>
             </p>
-            
-            <div class="pg-about-values">
-                <?php if( have_rows('kernwaarden') ): ?>
-                    <?php while( have_rows('kernwaarden') ): the_row(); ?>
-                        <div class="pg-about-value">
-                            <div class="pg-about-value__icon">
-                                <?php 
-                                $icon = get_sub_field('icon_svg');
-                                if ($icon && isset($icon['url'])) {
-                                    echo '<img src="' . esc_url($icon['url']) . '" alt="' . esc_attr($icon['alt']) . '" class="pg-icon" />';
-                                }
-                                ?>
-                            </div>
-                            <h3 class="pg-about-value__title"><?php echo esc_html(get_sub_field('kernwaarde_title')); ?></h3>
-                            <p class="pg-about-value__text"><?php echo esc_html(get_sub_field('kernwaarde_text')); ?></p>
+
+            <?php 
+    $kernwaarden       = function_exists( 'get_field' ) ? get_field( 'kernwaarden' ) : [];
+    $kernwaarden_count = is_array( $kernwaarden ) ? count( $kernwaarden ) : 0;
+?>
+            <?php if ( $kernwaarden_count > 0 ) : ?>
+                <div class="pg-about-values-slider<?php echo $kernwaarden_count <= 3 ? ' pg-about-values-slider--static' : ''; ?>" data-total="<?php echo esc_attr( $kernwaarden_count ); ?>">
+                    <button class="pg-about-values__nav pg-about-values__nav--prev" type="button" aria-label="<?php esc_attr_e( 'Vorige kernwaarden', 'parketvloeren' ); ?>" <?php echo $kernwaarden_count <= 3 ? 'disabled aria-disabled="true"' : ''; ?>>
+                        <span aria-hidden="true">‹</span>
+                    </button>
+                    <div class="pg-about-values-slider__viewport">
+                        <div class="pg-about-values">
+                            <?php foreach ( $kernwaarden as $kernwaarde ) : ?>
+                                <div class="pg-about-value">
+                                    <div class="pg-about-value__icon">
+                                        <?php
+                                        $icon = $kernwaarde['icon_svg'] ?? null;
+                                        if ( $icon && isset( $icon['url'] ) ) {
+                                            printf(
+                                                '<img src="%1$s" alt="%2$s" class="pg-icon" />',
+                                                esc_url( $icon['url'] ),
+                                                esc_attr( $icon['alt'] ?? '' )
+                                            );
+                                        }
+                                        ?>
+                                    </div>
+                                    <h3 class="pg-about-value__title"><?php echo esc_html( $kernwaarde['kernwaarde_title'] ?? '' ); ?></h3>
+                                    <p class="pg-about-value__text"><?php echo esc_html( $kernwaarde['kernwaarde_text'] ?? '' ); ?></p>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
-                    <?php endwhile; ?>
-                <?php endif; ?>
-            </div>
+                    </div>
+                    <button class="pg-about-values__nav pg-about-values__nav--next" type="button" aria-label="<?php esc_attr_e( 'Volgende kernwaarden', 'parketvloeren' ); ?>" <?php echo $kernwaarden_count <= 3 ? 'disabled aria-disabled="true"' : ''; ?>>
+                        <span aria-hidden="true">›</span>
+                    </button>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 
