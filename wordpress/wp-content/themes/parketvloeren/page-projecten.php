@@ -25,6 +25,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <main class="pg-projects" style="padding-top:120px;">
     <div class="pg-section__inner">
+        <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+            <?php
+            $acf_title          = get_field( 'projecten_titel' );
+            $acf_subtitle       = get_field( 'projecten_subtitel' );
+            $raw_content        = get_the_content();
+            $formatted_content  = $raw_content ? apply_filters( 'the_content', $raw_content ) : '';
+            ?>
+            <h1 class="pg-section__title"><?php echo esc_html( $acf_title ?: get_the_title() ); ?></h1>
+            <?php if ( $acf_subtitle ) : ?>
+                <p class="pg-section__intro pg-section__intro--subtitle"><?php echo esc_html( $acf_subtitle ); ?></p>
+            <?php endif; ?>
+            <?php if ( $formatted_content ) : ?>
+                <div class="pg-section__intro"><?php echo wp_kses_post( $formatted_content ); ?></div>
+            <?php endif; ?>
+        <?php endwhile; wp_reset_postdata(); endif; ?>
+
         <?php
         $projecten = array();
 
