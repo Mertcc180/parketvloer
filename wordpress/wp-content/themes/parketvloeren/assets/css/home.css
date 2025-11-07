@@ -1573,7 +1573,7 @@
   border-radius: 12px;
   padding: 2.5rem 2rem 2rem 2rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  text-align: center;
+  text-align: left;
   width: 100%;
   max-width: 600px;
   position: relative;
@@ -1605,7 +1605,7 @@
 .service-card--row {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   max-width: 1200px;
   width: 100%;
   background: rgba(255, 255, 255, 0.08);
@@ -1639,9 +1639,9 @@
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: flex-start;
-  min-width: 0;
+  text-align: left;
+  justify-content: flex-start;
 }
 
 .service-detail-content h3 {
@@ -1679,18 +1679,11 @@
 @media (max-width: 900px) {
   .service-card--row {
     flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 2rem 1rem;
-  }
-  .service-detail-img {
-    max-width: 100%;
-    width: 100%;
+    align-items: flex-start;
   }
   .service-detail-content h3,
   .service-detail-content p {
-    text-align: center;
-    width: 100%;
+    text-align: left;
   }
 }
 
