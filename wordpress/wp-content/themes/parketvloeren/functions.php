@@ -233,13 +233,20 @@ add_action( 'wp_enqueue_scripts', function () {
  * (Eén blok is genoeg; voorkom dubbele enqueue.)
  */
 add_action( 'wp_enqueue_scripts', function () {
-    if ( is_front_page() || is_page_template() ) {
+    if ( is_front_page() || is_page_template( 'page-projecten.php' ) ) {
         $ver = wp_get_theme()->get( 'Version' );
         wp_enqueue_style(
             'parketvloeren-home',
             get_stylesheet_directory_uri() . '/assets/css/home.css',
             array(),
             $ver
+        );
+        wp_enqueue_script(
+            'parketvloeren-sliders',
+            get_stylesheet_directory_uri() . '/assets/js/sliders.js',
+            array(),
+            $ver,
+            true
         );
     }
 }, 20 );

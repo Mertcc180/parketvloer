@@ -26,41 +26,60 @@ if ( ! defined( 'ABSPATH' ) ) {
 <main class="pg-projects" style="padding-top:120px;">
     <div class="pg-section__inner">
         <?php
-        // Haal de titel en subtitel uit ACF, met fallback tekst
-        $projecten_titel = get_field('projecten_titel');
-        $projecten_subtitel = get_field('projecten_subtitel');
+        $projecten = array();
+
+        if ( have_rows( 'projecten' ) ) {
+            while ( have_rows( 'projecten' ) ) {
+                the_row();
+
+                $afbeelding = get_sub_field( 'afbeelding' );
+                $titel      = get_sub_field( 'titel' );
+
+                if ( is_array( $afbeelding ) && ! empty( $afbeelding['url'] ) && $titel ) {
+                    $projecten[] = array(
+                        'afbeelding_url' => $afbeelding['url'],
+                        'titel'          => $titel,
+                    );
+                }
+            }
+        }
+
+        $project_groups   = array_chunk( $projecten, 6 );
+        $heeft_projecten  = ! empty( $project_groups );
+        $global_index     = 0;
         ?>
-        <?php if($projecten_titel): ?>
-            <h1 class="pg-section__title"><?php echo esc_html($projecten_titel); ?></h1>
-        <?php endif; ?>
-        <?php if($projecten_subtitel): ?>
-            <p style="text-align:center; color:#b0b0b0; margin-bottom:2.5rem;"><?php echo esc_html($projecten_subtitel); ?></p>
-        <?php endif; ?>
-        <div class="pg-grid pg-grid--3">
-            <?php
-            $heeft_projecten = false;
-            if( have_rows('projecten') ):
-                $heeft_projecten = true;
-                while( have_rows('projecten') ): the_row();
-                    $afbeelding = get_sub_field('afbeelding');
-                    $titel = get_sub_field('titel');
-                    $afbeelding_url = '';
-                    if (is_array($afbeelding) && !empty($afbeelding['url'])) {
-                        $afbeelding_url = $afbeelding['url'];
-                    }
-                    if($afbeelding_url && $titel):
-            ?>
-                <div class="pg-project">
-                    <div class="pg-project__media pg-project__media--click" data-src="<?php echo esc_url($afbeelding_url); ?>" data-index="<?php echo esc_attr($i); ?>" style="background-image:url('<?php echo esc_url($afbeelding_url); ?>');" role="button" tabindex="0" aria-label="Open afbeelding <?php echo esc_attr($i); ?>"></div>
-                    <div class="pg-project__title"><?php echo esc_html($titel); ?></div>
+
+        <?php if ( $heeft_projecten ) : ?>
+            <div class="pg-slider pg-projects__slider" data-per-desktop="1" data-per-tablet="1" data-per-mobile="1">
+                <button class="pg-slider__nav pg-slider__nav--prev" type="button" aria-label="Vorige projecten">‹</button>
+                <div class="pg-slider__viewport">
+                    <div class="pg-slider__track">
+                        <?php foreach ( $project_groups as $group ) : ?>
+                            <div class="pg-slider__slide">
+                                <div class="pg-grid pg-grid--3">
+                                    <?php foreach ( $group as $project ) : ?>
+                                        <div class="pg-project">
+                                            <div
+                                                class="pg-project__media pg-project__media--click"
+                                                data-src="<?php echo esc_url( $project['afbeelding_url'] ); ?>"
+                                                data-index="<?php echo esc_attr( $global_index ); ?>"
+                                                style="background-image:url('<?php echo esc_url( $project['afbeelding_url'] ); ?>');"
+                                                role="button"
+                                                tabindex="0"
+                                                aria-label="<?php echo esc_attr( sprintf( 'Open projectafbeelding %d', $global_index + 1 ) ); ?>"
+                                            ></div>
+                                            <div class="pg-project__title"><?php echo esc_html( $project['titel'] ); ?></div>
+                                        </div>
+                                        <?php $global_index++; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            <?php
-                    endif;
-                endwhile;
-            endif;
-            ?>
-        </div>
-        <?php if(!$heeft_projecten): ?>
+                <button class="pg-slider__nav pg-slider__nav--next" type="button" aria-label="Volgende projecten">›</button>
+            </div>
+        <?php else : ?>
             <p style="text-align:center;">Nog geen projecten toegevoegd.</p>
         <?php endif; ?>
     </div>
