@@ -1953,5 +1953,44 @@
 @media (max-width: 640px) {
   .pg-benefits .pg-card {
     min-height: 0;
+    width: 23rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .pg-slider {
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-inline: auto;
+    max-width: min(100%, 460px);
+  }
+
+  .pg-slider__viewport {
+    flex: 0 0 100%;
+  }
+
+  .pg-slider__track {
+    gap: var(--spacing-md);
+  }
+
+  .pg-slider__slide {
+    flex: 0 0 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+   
+  }
+
+  .pg-slider__slide > * {
+    width: 100%;
+     width: 25rem;
+  }
+
+  .pg-slider__nav {
+    position: static;
+    flex: 0 0 auto;
+    background: none !important;
+    padding: 0;
+    font-size: 2.4rem;
   }
 }
