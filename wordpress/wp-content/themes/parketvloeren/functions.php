@@ -233,7 +233,7 @@ add_action( 'wp_enqueue_scripts', function () {
  * (Eén blok is genoeg; voorkom dubbele enqueue.)
  */
 add_action( 'wp_enqueue_scripts', function () {
-    if ( is_front_page() || is_page_template( 'page-projecten.php' ) ) {
+    if ( is_front_page() || is_page_template() ) {
         $ver = wp_get_theme()->get( 'Version' );
         wp_enqueue_style(
             'parketvloeren-home',

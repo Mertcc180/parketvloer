@@ -50,7 +50,8 @@ if ( ! defined( 'ABSPATH' ) ) {
         ?>
 
         <?php if ( $heeft_projecten ) : ?>
-            <div class="pg-slider pg-projects__slider" data-per-desktop="1" data-per-tablet="1" data-per-mobile="1">
+            <?php $global_index = 0; ?>
+            <div class="pg-slider pg-projects__slider pg-projects__slider--desktop" data-per-desktop="1" data-per-tablet="1" data-per-mobile="1">
                 <button class="pg-slider__nav pg-slider__nav--prev" type="button" aria-label="Vorige projecten">‹</button>
                 <div class="pg-slider__viewport">
                     <div class="pg-slider__track">
@@ -78,6 +79,33 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
                 </div>
                 <button class="pg-slider__nav pg-slider__nav--next" type="button" aria-label="Volgende projecten">›</button>
+            </div>
+
+            <?php $global_index = 0; ?>
+            <div class="pg-slider pg-projects__slider pg-projects__slider--mobile" data-per-desktop="1" data-per-tablet="1" data-per-mobile="1">
+                <button class="pg-slider__nav pg-slider__nav--prev" type="button" aria-label="Vorige project">‹</button>
+                <div class="pg-slider__viewport">
+                    <div class="pg-slider__track">
+                        <?php foreach ( $projecten as $project ) : ?>
+                            <div class="pg-slider__slide">
+                                <div class="pg-project">
+                                    <div
+                                        class="pg-project__media pg-project__media--click"
+                                        data-src="<?php echo esc_url( $project['afbeelding_url'] ); ?>"
+                                        data-index="<?php echo esc_attr( $global_index ); ?>"
+                                        style="background-image:url('<?php echo esc_url( $project['afbeelding_url'] ); ?>');"
+                                        role="button"
+                                        tabindex="0"
+                                        aria-label="<?php echo esc_attr( sprintf( 'Open projectafbeelding %d', $global_index + 1 ) ); ?>"
+                                    ></div>
+                                    <div class="pg-project__title"><?php echo esc_html( $project['titel'] ); ?></div>
+                                </div>
+                            </div>
+                            <?php $global_index++; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <button class="pg-slider__nav pg-slider__nav--next" type="button" aria-label="Volgende project">›</button>
             </div>
         <?php else : ?>
             <p style="text-align:center;">Nog geen projecten toegevoegd.</p>
